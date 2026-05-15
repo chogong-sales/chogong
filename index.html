@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="조공 박람회">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>조공 박람회 가이드 🐾</title>
+  <link rel="manifest" href="manifest.json">
+  <!-- React 18 CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel (JSX를 브라우저에서 실행) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, "Noto Sans KR", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior: none;
+    }
+    #root { min-height: 100vh; }
+    /* iOS 안전 영역 대응 */
+    .safe-top { padding-top: env(safe-area-inset-top); }
+    .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:#fff;">
+      <!-- 로고 (흰색 배경) -->
+      <img src="data:image/png;base64,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"
+        style="width:130px;height:105px;object-fit:cover;object-position:top;border-radius:0;"
+        alt="조공">
+      <!-- 타이틀 -->
+      <div style="font-size:16px;font-weight:800;color:#FF6B00;letter-spacing:1.5px;margin-top:8px;">
+        박람회 가이드
+      </div>
+      <!-- 로딩 표시 -->
+      <div style="margin-top:32px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="font-size:12px;color:#9ca3af;">로딩 중...</div>
+        <div style="width:120px;height:3px;background:#f3f4f6;border-radius:99px;overflow:hidden;">
+          <div style="height:100%;width:70%;background:linear-gradient(90deg,#FF6B00,#FF9A40);border-radius:99px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/babel" data-type="module">
+const { useState, useMemo, useEffect } = React;
+
+/* ============================================================
+   PRODUCT DATA (전체 제품 - 바코드 없는 SET/대용량 포함)
+   ============================================================ */
+const PRODUCTS = [
+  // ─── 필로 CAT ───
+  { id:"PILLO01", name:"필로 CAT 연어&호키&게살 낱개", form:"파테", type:"주식캔", line:"필로", target:"고양이", size:"90g", price_n:3500, price_f:2700, protein:9, fat:2.5, calcium:0.12, phosphorus:0.10, fiber:0.15, sodium:0.85, moisture:60, calories:91, main:"연어(알래스카)/호키(뉴질랜드)/게살(대한민국)", sub:"해바라기유/타피오카전분/프락토올리고당/코랄칼슘/타우린/한천/정제염/비타민류", func:"타우린/프락토올리고당", allergen:"연어/호키/게살" },
+  { id:"PILLO02", name:"필로 CAT 연어&호키&게살 BOX", form:"파테", type:"주식캔", line:"필로", target:"고양이", size:"90g×12캔", price_n:38400, price_f:30000, protein:9, fat:2.5, calcium:0.12, phosphorus:0.10, fiber:0.15, sodium:0.85, moisture:60, calories:91, main:"연어(알래스카)/호키(뉴질랜드)/게살(대한민국)", sub:"해바라기유/타피오카전분/프락토올리고당/코랄칼슘/타우린/한천/정제염/비타민류", func:"타우린/프락토올리고당", allergen:"연어/호키/게살", isBox:true },
+  { id:"PILLO03", name:"필로 CAT 닭&고등어 낱개", form:"파테", type:"주식캔", line:"필로", target:"고양이", size:"90g", price_n:3500, price_f:2700, protein:8.5, fat:3.0, calcium:0.12, phosphorus:0.10, fiber:0.15, sodium:0.85, moisture:60, calories:122, main:"닭(대한민국)/고등어(노르웨이)", sub:"타피오카전분/해바라기유/프락토올리고당/코랄칼슘/타우린/정제염/한천/비타민류", func:"타우린/프락토올리고당", allergen:"닭/고등어" },
+  { id:"PILLO04", name:"필로 CAT 닭&고등어 BOX", form:"파테", type:"주식캔", line:"필로", target:"고양이", size:"90g×12캔", price_n:38400, price_f:30000, protein:8.5, fat:3.0, calcium:0.12, phosphorus:0.10, fiber:0.15, sodium:0.85, moisture:60, calories:122, main:"닭(대한민국)/고등어(노르웨이)", sub:"타피오카전분/해바라기유/프락토올리고당/코랄칼슘/타우린/정제염/한천/비타민류", func:"타우린/프락토올리고당", allergen:"닭/고등어", isBox:true },
+  { id:"PILLO05", name:"필로 CAT 닭&산양유 낱개", form:"파테", type:"주식캔", line:"필로", target:"고양이", size:"90g", price_n:3500, price_f:2700, protein:8.0, fat:2.5, calcium:0.12, phosphorus:0.10, fiber:0.20, sodium:0.85, moisture:60, calories:117, main:"닭(대한민국)/산양유(뉴질랜드)", sub:"타피오카전분/코랄칼슘/정제염/타우린/프락토올리고당/한천/비타민류", func:"타우린/프락토올리고당/산양유", allergen:"닭" },
+  { id:"PILLO06", name:"필로 CAT 닭&산양유 BOX", form:"파테", type:"주식캔", line:"필로", target:"고양이", size:"90g×12캔", price_n:38400, price_f:30000, protein:8.0, fat:2.5, calcium:0.12, phosphorus:0.10, fiber:0.20, sodium:0.85, moisture:60, calories:117, main:"닭(대한민국)/산양유(뉴질랜드)", sub:"타피오카전분/코랄칼슘/정제염/타우린/프락토올리고당/한천/비타민류", func:"타우린/프락토올리고당/산양유", allergen:"닭", isBox:true },
+  { id:"PILLO07", name:"필로 DOG 닭&산양유 낱개", form:"파테", type:"주식캔", line:"필로", target:"강아지", size:"140g", price_n:3200, price_f:2600, protein:6.0, fat:3.0, calcium:0.12, phosphorus:0.10, fiber:0.50, sodium:0.82, moisture:60, calories:156, main:"닭(대한민국)/산양유(뉴질랜드)", sub:"정제수/당근/단호박/오트밀/발아현미/유기농산양유/유기농코코넛오일/양배추/꽃송이버섯/코랄칼슘/비타민류", func:"산양유/꽃송이버섯/코코넛오일", allergen:"닭" },
+  { id:"PILLO09", name:"필로 DOG 칠면조 낱개", form:"파테", type:"주식캔", line:"필로", target:"강아지", size:"140g", price_n:3200, price_f:2600, protein:9.0, fat:2.5, calcium:0.10, phosphorus:0.08, fiber:1.0, sodium:0.85, moisture:60, calories:123, main:"칠면조(칠레)", sub:"정제수/단호박/당근/병아리콩/유기농코코넛오일/유기농브로콜리/유기농아로니아/코랄칼슘/비타민류", func:"아로니아(항산화)/코코넛오일/단일단백질", allergen:"칠면조" },
+  // ─── 소피 CAT ───
+  { id:"SOPHY01", name:"소피 CAT Tasty 참치 낱개", form:"파테", type:"주식캔", line:"소피", target:"고양이", size:"90g", price_n:2300, price_f:2100, protein:11, fat:4.0, calcium:0.32, phosphorus:0.24, fiber:0.30, sodium:0.83, moisture:60, calories:123, main:"참치(베트남)", sub:"정제수/해바라기유/타피오카/코랄칼슘/정제염/타우린/한천/비타민류", func:"타우린(심장·시력)", allergen:"참치" },
+  { id:"SOPHY02", name:"소피 CAT Tasty 참치 BOX", form:"파테", type:"주식캔", line:"소피", target:"고양이", size:"90g×12캔", price_n:26400, price_f:24000, protein:11, fat:4.0, calcium:0.32, phosphorus:0.24, fiber:0.30, sodium:0.83, moisture:60, calories:123, main:"참치(베트남)", sub:"정제수/해바라기유/타피오카/코랄칼슘/정제염/타우린/한천/비타민류", func:"타우린(심장·시력)", allergen:"참치", isBox:true },
+  { id:"SOPHY03", name:"소피 CAT Tasty 닭 낱개", form:"파테", type:"주식캔", line:"소피", target:"고양이", size:"90g", price_n:2300, price_f:2100, protein:11, fat:2.5, calcium:0.12, phosphorus:0.10, fiber:0.10, sodium:0.83, moisture:60, calories:103, main:"닭(대한민국)", sub:"정제수/닭간/해바라기유/타피오카전분/코랄칼슘/정제염/타우린/비타민류/한천", func:"타우린(심장·시력)/닭간", allergen:"닭" },
+  { id:"SOPHY04", name:"소피 CAT Tasty 닭 BOX", form:"파테", type:"주식캔", line:"소피", target:"고양이", size:"90g×12캔", price_n:26400, price_f:24000, protein:11, fat:2.5, calcium:0.12, phosphorus:0.10, fiber:0.10, sodium:0.83, moisture:60, calories:103, main:"닭(대한민국)", sub:"정제수/닭간/해바라기유/타피오카전분/코랄칼슘/정제염/타우린/비타민류/한천", func:"타우린(심장·시력)/닭간", allergen:"닭", isBox:true },
+  { id:"SOPHY05", name:"소피 CAT Natural 참치 낱개", form:"슈레드", type:"간식캔", line:"소피", target:"겸용", size:"90g", price_n:2300, price_f:2100, protein:13, fat:0.2, calcium:0.01, phosphorus:0.05, fiber:0.20, sodium:0.87, moisture:60, calories:60, main:"참치(중국)", sub:"정제수/비타민류", func:"고단백/저지방", allergen:"참치" },
+  { id:"SOPHY06", name:"소피 CAT Natural 참치 BOX", form:"슈레드", type:"간식캔", line:"소피", target:"겸용", size:"90g×12캔", price_n:26400, price_f:24000, protein:13, fat:0.2, calcium:0.01, phosphorus:0.05, fiber:0.20, sodium:0.87, moisture:60, calories:60, main:"참치(중국)", sub:"정제수/비타민류", func:"고단백/저지방", allergen:"참치", isBox:true },
+  { id:"SOPHY07", name:"소피 CAT Natural 참치&멸치 낱개", form:"슈레드", type:"간식캔", line:"소피", target:"겸용", size:"90g", price_n:2300, price_f:2100, protein:13, fat:0.2, calcium:0.01, phosphorus:0.05, fiber:0.20, sodium:0.85, moisture:60, calories:65, main:"참치(중국)/멸치(대한민국)", sub:"정제수/비타민류", func:"고단백/저지방", allergen:"참치/멸치" },
+  { id:"SOPHY09", name:"소피 CAT Natural 참치&닭 낱개", form:"슈레드", type:"간식캔", line:"소피", target:"겸용", size:"90g", price_n:2300, price_f:2100, protein:13, fat:1.0, calcium:0.003, phosphorus:0.05, fiber:0.20, sodium:0.85, moisture:60, calories:96, main:"참치(중국)/닭(대한민국)", sub:"정제수/비타민류", func:"고단백/이중단백질", allergen:"닭/참치" },
+  { id:"SOPHY11", name:"소피 CAT Natural 참치&먹태 낱개", form:"슈레드", type:"간식캔", line:"소피", target:"겸용", size:"90g", price_n:2300, price_f:2100, protein:13, fat:1.0, calcium:0.01, phosphorus:0.05, fiber:0.20, sodium:0.85, moisture:60, calories:97, main:"참치(중국)/먹태(대한민국)", sub:"정제수/비타민류", func:"고단백/저지방", allergen:"참치/먹태" },
+  { id:"SOPHY13", name:"소피 CAT Natural 닭 낱개", form:"슈레드", type:"간식캔", line:"소피", target:"겸용", size:"90g", price_n:2300, price_f:2100, protein:13, fat:0.4, calcium:0.003, phosphorus:0.10, fiber:2.0, sodium:0.85, moisture:60, calories:73, main:"닭(대한민국)", sub:"정제수/비타민류", func:"단일단백질/고단백/저지방", allergen:"닭" },
+  // ─── 동네고양이 ───
+  { id:"Neighbor01", name:"동네 고양이 습식캔 낱개", form:"파테", type:"주식캔", line:"동네고양이", target:"겸용", size:"90g", price_n:1300, price_f:1300, protein:11, fat:4.0, calcium:0.12, phosphorus:0.10, fiber:0.20, sodium:0.83, moisture:60, calories:122, main:"닭(대한민국)", sub:"정제수/참치/해바라기유/타피오카전분/코랄칼슘/정제염/타우린/유산균/비타민류/한천", func:"타우린/유산균", allergen:"닭" },
+  { id:"Neighbor02", name:"동네 고양이 습식캔 BOX", form:"파테", type:"주식캔", line:"동네고양이", target:"겸용", size:"90g×12캔", price_n:14400, price_f:14400, protein:11, fat:4.0, calcium:0.12, phosphorus:0.10, fiber:0.20, sodium:0.83, moisture:60, calories:122, main:"닭(대한민국)", sub:"정제수/참치/해바라기유/타피오카전분/코랄칼슘/정제염/타우린/유산균/비타민류/한천", func:"타우린/유산균", allergen:"닭", isBox:true },
+  { id:"Neighbor03", name:"동네고양이 60스틱", form:"츄르", type:"습식간식", line:"동네고양이", target:"겸용", size:"10g×60스틱", price_n:21000, price_f:21000, protein:9, fat:0.1, calcium:0.07, phosphorus:0.07, fiber:3.0, sodium:0.88, moisture:60, calories:40, main:"닭(대한민국)", sub:"정제수/타피오카전분/칼슘/오메가-3/타우린/비타민류", func:"오메가-3/타우린", allergen:"닭" },
+  // ─── 한방보양 ───
+  { id:"Kampo01", name:"한방보양 삼계탕전 4P", form:"츄르", type:"습식간식", line:"한방보양", target:"겸용", size:"15g×4스틱", price_n:5500, price_f:4500, protein:9, fat:0.1, calcium:0.01, phosphorus:0.08, fiber:1.0, sodium:0.90, moisture:60, calories:72, main:"닭(대한민국)", sub:"정제수/타피오카전분/용안육/산약/대추/산수유/구기자/당근/브로콜리", func:"용안육/산약/대추/산수유/구기자(한방보양/면역)", allergen:"닭" },
+  { id:"Kampo01-30", name:"한방보양 삼계탕전 30P", form:"츄르", type:"습식간식", line:"한방보양", target:"겸용", size:"15g×30스틱", price_n:41250, price_f:29000, protein:9, fat:0.1, calcium:0.01, phosphorus:0.08, fiber:1.0, sodium:0.90, moisture:60, calories:72, main:"닭(대한민국)", sub:"정제수/타피오카전분/용안육/산약/대추/산수유/구기자/당근/브로콜리", func:"용안육/산약/대추/산수유/구기자(한방보양/면역)", allergen:"닭", parent:"Kampo01", isBundle:true },
+  { id:"Kampo02", name:"한방보양 참치오리탕전 4P", form:"츄르", type:"습식간식", line:"한방보양", target:"겸용", size:"15g×4스틱", price_n:7800, price_f:7000, protein:8, fat:0.1, calcium:0.02, phosphorus:0.08, fiber:1.0, sodium:0.90, moisture:60, calories:68, main:"오리(대한민국)/참치", sub:"정제수/타피오카전분/산약/용안육/대추/6년근홍삼/분골녹용/당근/브로콜리", func:"산약/용안육/대추/6년근홍삼/분골녹용(보양/면역강화)", allergen:"참치/오리" },
+  { id:"Kampo02-30", name:"한방보양 참치오리탕전 30P", form:"츄르", type:"습식간식", line:"한방보양", target:"겸용", size:"15g×30스틱", price_n:58500, price_f:45000, protein:8, fat:0.1, calcium:0.02, phosphorus:0.08, fiber:1.0, sodium:0.90, moisture:60, calories:68, main:"오리(대한민국)/참치", sub:"정제수/타피오카전분/산약/용안육/대추/6년근홍삼/분골녹용/당근/브로콜리", func:"산약/용안육/대추/6년근홍삼/분골녹용(보양/면역강화)", allergen:"참치/오리", parent:"Kampo02", isBundle:true },
+  { id:"Kampo03", name:"한방보양 갈비탕전 4P", form:"츄르", type:"습식간식", line:"한방보양", target:"겸용", size:"15g×4스틱", price_n:9900, price_f:9000, protein:6, fat:0.23, calcium:0.01, phosphorus:0.03, fiber:2.0, sodium:0.90, moisture:60, calories:80, main:"한우(대한민국)", sub:"정제수/타피오카전분/러시아산분골녹용/당귀/백출/6년근홍삼/당근/브로콜리", func:"분골녹용/당귀/백출/6년근홍삼(보양/관절/면역)", allergen:"소고기" },
+  { id:"Kampo03-SET", name:"한방보양 갈비탕전 10팩", form:"츄르", type:"습식간식", line:"한방보양", target:"겸용", size:"15g×10스틱", price_n:99000, price_f:78000, protein:6, fat:0.23, calcium:0.01, phosphorus:0.03, fiber:2.0, sodium:0.90, moisture:60, calories:80, main:"한우(대한민국)", sub:"정제수/타피오카전분/러시아산분골녹용/당귀/백출/6년근홍삼/당근/브로콜리", func:"분골녹용/당귀/백출/6년근홍삼(보양/관절/면역)", allergen:"소고기", parent:"Kampo03", isBundle:true },
+  // ─── 좋아해 ───
+  { id:"Love01", name:"산양유 좋아해 4P", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱", price_n:5000, price_f:4500, protein:5, fat:2.0, calcium:0.13, phosphorus:0.13, fiber:1.0, sodium:0.91, moisture:60, calories:80, main:"닭(대한민국)/산양유(뉴질랜드)", sub:"정제수/타피오카전분/제주당근/제주브로콜리/프락토올리고당", func:"산양유(소화/면역)/프락토올리고당(장건강)", allergen:"닭/산양유" },
+  { id:"Love01-SET", name:"산양유 좋아해 10팩", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱×10팩", price_n:50000, price_f:39000, protein:5, fat:2.0, calcium:0.13, phosphorus:0.13, fiber:1.0, sodium:0.91, moisture:60, calories:80, main:"닭(대한민국)/산양유(뉴질랜드)", sub:"정제수/타피오카전분/제주당근/제주브로콜리/프락토올리고당", func:"산양유(소화/면역)/프락토올리고당(장건강)", allergen:"닭/산양유", parent:"Love01", isBundle:true },
+  { id:"Love02", name:"나 게살 좋아해 4P", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱", price_n:2900, price_f:2900, protein:7, fat:0.1, calcium:0.01, phosphorus:0.05, fiber:0.70, sodium:0.89, moisture:60, calories:60, main:"닭(대한민국)/게살(대한민국)", sub:"정제수/타피오카전분/타우린", func:"타우린/단일단백질/저지방", allergen:"닭/게살" },
+  { id:"Love02-SET", name:"나 게살 좋아해 10팩", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱×10팩", price_n:29000, price_f:29000, protein:7, fat:0.1, calcium:0.01, phosphorus:0.05, fiber:0.70, sodium:0.89, moisture:60, calories:60, main:"닭(대한민국)/게살(대한민국)", sub:"정제수/타피오카전분/타우린", func:"타우린/단일단백질/저지방", allergen:"닭/게살", parent:"Love02", isBundle:true },
+  { id:"Love03", name:"나 참돔 좋아해 4P", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱", price_n:4500, price_f:4500, protein:7.7, fat:9.7, calcium:0.01, phosphorus:0.07, fiber:0.18, sodium:0.90, moisture:60, calories:56, main:"참돔(대한민국 자연산)", sub:"정제수/타피오카전분/타우린", func:"자연산참돔/오메가-3지방산", allergen:"참돔" },
+  { id:"Love03-SET", name:"나 참돔 좋아해 10팩", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱×10팩", price_n:45000, price_f:39000, protein:7.7, fat:9.7, calcium:0.01, phosphorus:0.07, fiber:0.18, sodium:0.90, moisture:60, calories:56, main:"참돔(대한민국 자연산)", sub:"정제수/타피오카전분/타우린", func:"자연산참돔/오메가-3지방산", allergen:"참돔", parent:"Love03", isBundle:true },
+  { id:"Love04", name:"나 갈치 좋아해 4P", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱", price_n:4500, price_f:4500, protein:7, fat:1.4, calcium:0.01, phosphorus:0.05, fiber:0.90, sodium:0.90, moisture:60, calories:64, main:"갈치(대한민국)", sub:"정제수/타피오카전분/비타민E", func:"갈치단백질/비타민E/저지방", allergen:"갈치" },
+  { id:"Love04-SET", name:"나 갈치 좋아해 10팩", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱×10팩", price_n:45000, price_f:39000, protein:7, fat:1.4, calcium:0.01, phosphorus:0.05, fiber:0.90, sodium:0.90, moisture:60, calories:64, main:"갈치(대한민국)", sub:"정제수/타피오카전분/비타민E", func:"갈치단백질/비타민E/저지방", allergen:"갈치", parent:"Love04", isBundle:true },
+  { id:"Love05", name:"나 소고기 좋아해 4P", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱", price_n:4500, price_f:4500, protein:6, fat:2.0, calcium:0.005, phosphorus:0.05, fiber:1.0, sodium:0.89, moisture:60, calories:76, main:"소고기 홍두깨살(호주)", sub:"정제수/타피오카전분/후코이단", func:"후코이단(면역)/호주산소고기", allergen:"소고기" },
+  { id:"Love05-SET", name:"나 소고기 좋아해 10팩", form:"츄르", type:"습식간식", line:"좋아해", target:"겸용", size:"15g×4스틱×10팩", price_n:45000, price_f:39000, protein:6, fat:2.0, calcium:0.005, phosphorus:0.05, fiber:1.0, sodium:0.89, moisture:60, calories:76, main:"소고기 홍두깨살(호주)", sub:"정제수/타피오카전분/후코이단", func:"후코이단(면역)/호주산소고기", allergen:"소고기", parent:"Love05", isBundle:true },
+  // ─── 리틀제주 ───
+  { id:"Jeju01", name:"리틀제주 닭가슴살 4P", form:"츄르", type:"습식간식", line:"리틀제주", target:"겸용", size:"15g×4스틱", price_n:4500, price_f:4500, protein:8, fat:0.01, calcium:0.01, phosphorus:0.07, fiber:1.0, sodium:0.88, moisture:60, calories:60, main:"닭(대한민국)", sub:"정제수/타피오카전분/제주당근/제주애플망고/제주브로콜리/제주무농약바나나/제주청란노른자/남해죽방멸치", func:"제주산유기농재료/청란노른자/죽방멸치", allergen:"닭/멸치" },
+  { id:"Jeju01-SET", name:"리틀제주 닭가슴살 10팩", form:"츄르", type:"습식간식", line:"리틀제주", target:"겸용", size:"15g×4스틱×10팩", price_n:45000, price_f:39000, protein:8, fat:0.01, calcium:0.01, phosphorus:0.07, fiber:1.0, sodium:0.88, moisture:60, calories:60, main:"닭(대한민국)", sub:"정제수/타피오카전분/제주당근/제주애플망고/제주브로콜리/제주무농약바나나/제주청란노른자/남해죽방멸치", func:"제주산유기농재료/청란노른자/죽방멸치", allergen:"닭/멸치", parent:"Jeju01", isBundle:true },
+  { id:"Jeju02", name:"리틀제주 말고기 4P", form:"츄르", type:"습식간식", line:"리틀제주", target:"겸용", size:"15g×4스틱", price_n:6000, price_f:5500, protein:7, fat:0.1, calcium:0.008, phosphorus:0.03, fiber:0.80, sodium:0.87, moisture:60, calories:64, main:"말고기(대한민국)", sub:"정제수/제주애플망고/제주당근/제주브로콜리/제주무농약바나나/남해죽방멸치", func:"희귀단백질말고기(저알레르기)/제주산재료", allergen:"말고기/멸치" },
+  { id:"Jeju02-SET", name:"리틀제주 말고기 10팩", form:"츄르", type:"습식간식", line:"리틀제주", target:"겸용", size:"15g×4스틱×10팩", price_n:60000, price_f:45000, protein:7, fat:0.1, calcium:0.008, phosphorus:0.03, fiber:0.80, sodium:0.87, moisture:60, calories:64, main:"말고기(대한민국)", sub:"정제수/제주애플망고/제주당근/제주브로콜리/제주무농약바나나/남해죽방멸치", func:"희귀단백질말고기(저알레르기)/제주산재료", allergen:"말고기/멸치", parent:"Jeju02", isBundle:true },
+  { id:"Jeju03", name:"리틀제주 꽃사슴 4P", form:"츄르", type:"습식간식", line:"리틀제주", target:"겸용", size:"15g×4스틱", price_n:6000, price_f:5500, protein:7, fat:1.0, calcium:0.01, phosphorus:0.07, fiber:0.06, sodium:0.89, moisture:60, calories:68, main:"꽃사슴(대한민국)", sub:"정제수/제주당근/제주애플망고/제주브로콜리/제주바나나/남해멸치", func:"희귀단백질사슴(저알레르기)/제주산재료", allergen:"꽃사슴/멸치" },
+  { id:"Jeju03-SET", name:"리틀제주 꽃사슴 10팩", form:"츄르", type:"습식간식", line:"리틀제주", target:"겸용", size:"15g×4스틱×10팩", price_n:60000, price_f:53000, protein:7, fat:1.0, calcium:0.01, phosphorus:0.07, fiber:0.06, sodium:0.89, moisture:60, calories:68, main:"꽃사슴(대한민국)", sub:"정제수/제주당근/제주애플망고/제주브로콜리/제주바나나/남해멸치", func:"희귀단백질사슴(저알레르기)/제주산재료", allergen:"꽃사슴/멸치", parent:"Jeju03", isBundle:true },
+  { id:"Jeju04", name:"리틀제주 호키&광어 4P", form:"츄르", type:"습식간식", line:"리틀제주", target:"겸용", size:"15g×4스틱", price_n:5500, price_f:4500, protein:6, fat:0.3, calcium:0.01, phosphorus:0.08, fiber:1.0, sodium:0.90, moisture:60, calories:55, main:"광어(대한민국)/호키(뉴질랜드)", sub:"정제수/타피오카전분/제주유기농당근/제주유기농브로콜리/제주유기농콜리플라워/남해멸치", func:"흰살생선(저지방)/제주유기농채소", allergen:"호키/광어" },
+  { id:"Jeju04-SET", name:"리틀제주 호키&광어 10팩", form:"츄르", type:"습식간식", line:"리틀제주", target:"겸용", size:"15g×4스틱×10팩", price_n:55000, price_f:39000, protein:6, fat:0.3, calcium:0.01, phosphorus:0.08, fiber:1.0, sodium:0.90, moisture:60, calories:55, main:"광어(대한민국)/호키(뉴질랜드)", sub:"정제수/타피오카전분/제주유기농당근/제주유기농브로콜리/제주유기농콜리플라워/남해멸치", func:"흰살생선(저지방)/제주유기농채소", allergen:"호키/광어", parent:"Jeju04", isBundle:true },
+  // ─── 오키로스틱 ───
+  { id:"5KM01", name:"오키로스틱 레드 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3200, price_f:3000, protein:6, fat:0.2, calcium:0.01, phosphorus:0.07, fiber:0.90, sodium:0.91, moisture:60, calories:72, main:"연어(알래스카)", sub:"정제수/타피오카전분/딸기/당근/레드파프리카/크랜베리/비트/천연색소", func:"연어(오메가-3)/크랜베리(항산화)", allergen:"연어", price_tier:"일반" },
+  { id:"5KM01-SET", name:"오키로스틱 레드 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:32000, price_f:28000, protein:6, fat:0.2, calcium:0.01, phosphorus:0.07, fiber:0.90, sodium:0.91, moisture:60, calories:72, main:"연어(알래스카)", sub:"정제수/타피오카전분/딸기/당근/레드파프리카/크랜베리/비트/천연색소", func:"연어(오메가-3)/크랜베리(항산화)", allergen:"연어", parent:"5KM01", isBundle:true, price_tier:"일반" },
+  { id:"5KM02", name:"오키로스틱 퍼플 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3200, price_f:3000, protein:9, fat:0.16, calcium:0.01, phosphorus:0.07, fiber:0.90, sodium:0.92, moisture:60, calories:58, main:"닭(대한민국)", sub:"정제수/타피오카전분/아로니아/자색고구마/블루베리/적양배추/아사이베리/천연색소", func:"아로니아·블루베리·아사이베리(항산화)/자색고구마", allergen:"닭", price_tier:"일반" },
+  { id:"5KM02-SET", name:"오키로스틱 퍼플 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:32000, price_f:28000, protein:9, fat:0.16, calcium:0.01, phosphorus:0.07, fiber:0.90, sodium:0.92, moisture:60, calories:58, main:"닭(대한민국)", sub:"정제수/타피오카전분/아로니아/자색고구마/블루베리/적양배추/아사이베리/천연색소", func:"아로니아·블루베리·아사이베리(항산화)/자색고구마", allergen:"닭", parent:"5KM02", isBundle:true, price_tier:"일반" },
+  { id:"5KM03", name:"오키로스틱 옐로우 닭가슴살 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3200, price_f:3000, protein:7, fat:0.1, calcium:0.01, phosphorus:0.05, fiber:0.40, sodium:0.95, moisture:60, calories:54, main:"닭(대한민국)", sub:"정제수/타피오카전분/단호박/늙은호박/황태/파인애플/강황", func:"강황(항염증)/단호박(비타민A)/황태", allergen:"닭", price_tier:"일반" },
+  { id:"5KM03-SET", name:"오키로스틱 옐로우 닭가슴살 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:32000, price_f:28000, protein:7, fat:0.1, calcium:0.01, phosphorus:0.05, fiber:0.40, sodium:0.95, moisture:60, calories:54, main:"닭(대한민국)", sub:"정제수/타피오카전분/단호박/늙은호박/황태/파인애플/강황", func:"강황(항염증)/단호박(비타민A)/황태", allergen:"닭", parent:"5KM03", isBundle:true, price_tier:"일반" },
+  { id:"5KM04", name:"오키로스틱 옐로우 대구 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3500, price_f:3000, protein:3, fat:0.03, calcium:0.01, phosphorus:0.10, fiber:0.10, sodium:0.94, moisture:60, calories:31, main:"대구(노르웨이)", sub:"정제수/타피오카전분/단호박/늙은호박/황태/파인애플/강황", func:"초저지방/대구/강황(항염증)", allergen:"대구", price_tier:"일반" },
+  { id:"5KM04-SET", name:"오키로스틱 옐로우 대구 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:35000, price_f:28000, protein:3, fat:0.03, calcium:0.01, phosphorus:0.10, fiber:0.10, sodium:0.94, moisture:60, calories:31, main:"대구(노르웨이)", sub:"정제수/타피오카전분/단호박/늙은호박/황태/파인애플/강황", func:"초저지방/대구/강황(항염증)", allergen:"대구", parent:"5KM04", isBundle:true, price_tier:"일반" },
+  { id:"5KM05", name:"오키로스틱 그린 닭가슴살 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3500, price_f:3000, protein:8, fat:0.08, calcium:0.008, phosphorus:0.05, fiber:0.90, sodium:0.90, moisture:60, calories:55, main:"닭(대한민국)", sub:"정제수/타피오카전분/초록입홍합/멜론/글루코사민/클로렐라/브로콜리/아스파라거스/뮤코다당단백(상어연골추출)", func:"초록입홍합+글루코사민+뮤코다당단백(관절건강)/클로렐라", allergen:"닭", price_tier:"일반" },
+  { id:"5KM05-SET", name:"오키로스틱 그린 닭가슴살 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:35000, price_f:28000, protein:8, fat:0.08, calcium:0.008, phosphorus:0.05, fiber:0.90, sodium:0.90, moisture:60, calories:55, main:"닭(대한민국)", sub:"정제수/타피오카전분/초록입홍합/멜론/글루코사민/클로렐라/브로콜리/아스파라거스/뮤코다당단백(상어연골추출)", func:"초록입홍합+글루코사민+뮤코다당단백(관절건강)/클로렐라", allergen:"닭", parent:"5KM05", isBundle:true, price_tier:"일반" },
+  { id:"5KM06", name:"오키로스틱 그린 호키 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3500, price_f:3000, protein:3.5, fat:0.01, calcium:0.01, phosphorus:0.04, fiber:1.0, sodium:0.89, moisture:60, calories:40, main:"호키(뉴질랜드)", sub:"정제수/타피오카전분/초록입홍합/멜론/글루코사민/클로렐라/브로콜리/아스파라거스/뮤코다당단백(상어연골추출)", func:"초록입홍합+글루코사민+뮤코다당단백(관절건강)/초저지방", allergen:"호키", price_tier:"일반" },
+  { id:"5KM06-SET", name:"오키로스틱 그린 호키 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:35000, price_f:28000, protein:3.5, fat:0.01, calcium:0.01, phosphorus:0.04, fiber:1.0, sodium:0.89, moisture:60, calories:40, main:"호키(뉴질랜드)", sub:"정제수/타피오카전분/초록입홍합/멜론/글루코사민/클로렐라/브로콜리/아스파라거스/뮤코다당단백(상어연골추출)", func:"초록입홍합+글루코사민+뮤코다당단백(관절건강)/초저지방", allergen:"호키", parent:"5KM06", isBundle:true, price_tier:"일반" },
+  { id:"5KM07", name:"오키로스틱 화이트 칠면조 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3800, price_f:3500, protein:8, fat:0.1, calcium:0.008, phosphorus:0.08, fiber:1.0, sodium:0.93, moisture:60, calories:54, main:"칠면조(칠레)", sub:"정제수/타피오카전분/배/콜리플라워/바나나/코티지치즈", func:"단일단백질칠면조(저알레르기)/코티지치즈(칼슘)", allergen:"칠면조", price_tier:"프리미엄" },
+  { id:"5KM07-SET", name:"오키로스틱 화이트 칠면조 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:38000, price_f:32000, protein:8, fat:0.1, calcium:0.008, phosphorus:0.08, fiber:1.0, sodium:0.93, moisture:60, calories:54, main:"칠면조(칠레)", sub:"정제수/타피오카전분/배/콜리플라워/바나나/코티지치즈", func:"단일단백질칠면조(저알레르기)/코티지치즈(칼슘)", allergen:"칠면조", parent:"5KM07", isBundle:true, price_tier:"프리미엄" },
+  { id:"5KM08", name:"오키로스틱 블랙 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:4000, price_f:3500, protein:6.7, fat:0.2, calcium:0.008, phosphorus:0.07, fiber:0.50, sodium:0.89, moisture:60, calories:44, main:"닭(대한민국)/오골계(대한민국)", sub:"정제수/타피오카전분/블랙퀴노아/캐롭", func:"오골계(보양)/블랙퀴노아(항산화)/캐롭", allergen:"닭/오골계", price_tier:"프리미엄" },
+  { id:"5KM08-SET", name:"오키로스틱 블랙 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:40000, price_f:32000, protein:6.7, fat:0.2, calcium:0.008, phosphorus:0.07, fiber:0.50, sodium:0.89, moisture:60, calories:44, main:"닭(대한민국)/오골계(대한민국)", sub:"정제수/타피오카전분/블랙퀴노아/캐롭", func:"오골계(보양)/블랙퀴노아(항산화)/캐롭", allergen:"닭/오골계", parent:"5KM08", isBundle:true, price_tier:"프리미엄" },
+  { id:"5KM09", name:"오키로스틱 골드 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3800, price_f:3500, protein:10, fat:0.8, calcium:0.10, phosphorus:0.10, fiber:1.5, sodium:0.90, moisture:60, calories:66, main:"닭(대한민국)/메추리(대한민국)", sub:"정제수/타피오카전분/꽃송이버섯/베타글루칸/오트밀/골든비트/프로폴리스", func:"꽃송이버섯+베타글루칸(면역)/프로폴리스(항균)/메추리(보양)", allergen:"닭/메추리", price_tier:"프리미엄" },
+  { id:"5KM09-SET", name:"오키로스틱 골드 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:40000, price_f:32000, protein:10, fat:0.8, calcium:0.10, phosphorus:0.10, fiber:1.5, sodium:0.90, moisture:60, calories:66, main:"닭(대한민국)/메추리(대한민국)", sub:"정제수/타피오카전분/꽃송이버섯/베타글루칸/오트밀/골든비트/프로폴리스", func:"꽃송이버섯+베타글루칸(면역)/프로폴리스(항균)/메추리(보양)", allergen:"닭/메추리", parent:"5KM09", isBundle:true, price_tier:"프리미엄" },
+  { id:"5KM10", name:"오키로스틱 핑크 4P", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱", price_n:3800, price_f:3500, protein:6, fat:0.3, calcium:0.006, phosphorus:0.06, fiber:0.10, sodium:0.95, moisture:60, calories:44, main:"연어(알래스카)/오리(대한민국)/농어(태국)", sub:"정제수/타피오카전분/타히보추출물/산수유/라즈베리", func:"타히보추출물(항암보조)/산수유(항산화)/3중단백질", allergen:"연어/농어/오리", price_tier:"프리미엄" },
+  { id:"5KM10-SET", name:"오키로스틱 핑크 10팩", form:"츄르", type:"습식간식", line:"오키로스틱", target:"겸용", size:"14g×4스틱×10팩", price_n:38000, price_f:32000, protein:6, fat:0.3, calcium:0.006, phosphorus:0.06, fiber:0.10, sodium:0.95, moisture:60, calories:44, main:"연어(알래스카)/오리(대한민국)/농어(태국)", sub:"정제수/타피오카전분/타히보추출물/산수유/라즈베리", func:"타히보추출물(항암보조)/산수유(항산화)/3중단백질", allergen:"연어/농어/오리", parent:"5KM10", isBundle:true, price_tier:"프리미엄" },
+  // ─── 이지케어 ───
+  { id:"Easycare01", name:"이지케어 릴리프", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱", price_n:12900, price_f:10900, protein:7, fat:0.1, calcium:0.01, phosphorus:0.07, fiber:0.90, sodium:0.89, moisture:60, calories:90, main:"닭(대한민국)", sub:"정제수/타피오카전분/초유/L-트립토판/비타민B1/발레리안추출물/테아닌/켈프", func:"L-트립토판+비타민B1+발레리안추출물+L-테아닌+켈프(분리불안/스트레스완화)", allergen:"닭/초유" },
+  { id:"Easycare01-SET", name:"이지케어 릴리프 3곽", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱×3곽", price_n:38700, price_f:29900, protein:7, fat:0.1, calcium:0.01, phosphorus:0.07, fiber:0.90, sodium:0.89, moisture:60, calories:90, main:"닭(대한민국)", sub:"정제수/타피오카전분/초유/L-트립토판/비타민B1/발레리안추출물/테아닌/켈프", func:"L-트립토판+비타민B1+발레리안추출물+L-테아닌+켈프(분리불안/스트레스완화)", allergen:"닭/초유", parent:"Easycare01", isBundle:true },
+  { id:"Easycare02", name:"이지케어 이너프", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱", price_n:12900, price_f:10900, protein:8, fat:0.4, calcium:0.05, phosphorus:0.05, fiber:1.0, sodium:0.89, moisture:60, calories:87, main:"닭(대한민국)", sub:"정제수/타피오카전분/유기농산양유/오메가-3/프락토올리고당/후코이단/비타민류/유산균/베타글루칸/코엔자임Q10/비타민E/아연", func:"오메가-3+유산균+베타글루칸+코엔자임Q10+비타민E+아연(종합면역/심장/항산화)", allergen:"닭/산양유" },
+  { id:"Easycare02-SET", name:"이지케어 이너프 3곽", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱×3곽", price_n:38700, price_f:29900, protein:8, fat:0.4, calcium:0.05, phosphorus:0.05, fiber:1.0, sodium:0.89, moisture:60, calories:87, main:"닭(대한민국)", sub:"정제수/타피오카전분/유기농산양유/오메가-3/프락토올리고당/후코이단/비타민류/유산균/베타글루칸/코엔자임Q10/비타민E/아연", func:"오메가-3+유산균+베타글루칸+코엔자임Q10+비타민E+아연(종합면역/심장/항산화)", allergen:"닭/산양유", parent:"Easycare02", isBundle:true },
+  { id:"Easycare03", name:"이지케어 오메가-3", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱", price_n:10900, price_f:9900, protein:7, fat:0.8, calcium:0.05, phosphorus:0.04, fiber:0.50, sodium:0.89, moisture:60, calories:108, main:"연어(알래스카)", sub:"정제수/타피오카전분/오메가-3/연어오일", func:"오메가-3(피부/관절/심장/뇌건강)/연어오일", allergen:"연어" },
+  { id:"Easycare03-SET", name:"이지케어 오메가-3 3곽", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱×3곽", price_n:32700, price_f:26700, protein:7, fat:0.8, calcium:0.05, phosphorus:0.04, fiber:0.50, sodium:0.89, moisture:60, calories:108, main:"연어(알래스카)", sub:"정제수/타피오카전분/오메가-3/연어오일", func:"오메가-3(피부/관절/심장/뇌건강)/연어오일", allergen:"연어", parent:"Easycare03", isBundle:true },
+  { id:"Easycare04", name:"이지케어 유리너리", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱", price_n:10900, price_f:9900, protein:9, fat:1.0, calcium:0.04, phosphorus:0.05, fiber:0.80, sodium:0.89, moisture:60, calories:100, main:"닭(대한민국)", sub:"정제수/타피오카전분/유기농산양유/치즈분말/NAG/크랜베리추출물/L-트립토판/D-만노오스/L-테아닌/베타카로틴/파슬리분말/강황추출물", func:"NAG+크랜베리+D-만노오스+L-테아닌+강황추출물(방광/요로건강)", allergen:"닭/산양유/치즈" },
+  { id:"Easycare04-SET", name:"이지케어 유리너리 3곽", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱×3곽", price_n:32700, price_f:26700, protein:9, fat:1.0, calcium:0.04, phosphorus:0.05, fiber:0.80, sodium:0.89, moisture:60, calories:100, main:"닭(대한민국)", sub:"정제수/타피오카전분/유기농산양유/치즈분말/NAG/크랜베리추출물/L-트립토판/D-만노오스/L-테아닌/베타카로틴/파슬리분말/강황추출물", func:"NAG+크랜베리+D-만노오스+L-테아닌+강황추출물(방광/요로건강)", allergen:"닭/산양유/치즈", parent:"Easycare04", isBundle:true },
+  { id:"Easycare05", name:"이지케어 헤어볼", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱", price_n:10900, price_f:9900, protein:8.5, fat:0.9, calcium:0.03, phosphorus:0.05, fiber:0.80, sodium:0.89, moisture:60, calories:85, main:"닭(대한민국)", sub:"정제수/타피오카전분/유기농산양유/차전자피/귀리식이섬유/이눌린식이섬유/프락토올리고당/새싹보리", func:"차전자피+귀리식이섬유+이눌린+프락토올리고당+새싹보리(헤어볼/변비개선)", allergen:"닭/산양유" },
+  { id:"Easycare05-SET", name:"이지케어 헤어볼 3곽", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱×3곽", price_n:32700, price_f:26700, protein:8.5, fat:0.9, calcium:0.03, phosphorus:0.05, fiber:0.80, sodium:0.89, moisture:60, calories:85, main:"닭(대한민국)", sub:"정제수/타피오카전분/유기농산양유/차전자피/귀리식이섬유/이눌린식이섬유/프락토올리고당/새싹보리", func:"차전자피+귀리식이섬유+이눌린+프락토올리고당+새싹보리(헤어볼/변비개선)", allergen:"닭/산양유", parent:"Easycare05", isBundle:true },
+  { id:"Easycare06", name:"이지케어 멀티바이오틱스", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱", price_n:10900, price_f:9900, protein:9, fat:0.1, calcium:0.005, phosphorus:0.05, fiber:0.50, sodium:0.89, moisture:60, calories:31, main:"닭(대한민국)", sub:"정제수/타피오카전분/열처리유산균(LLQ1,LPQ1)/비타민B12/비타민류/L-글루타민", func:"열처리유산균LLQ1+LPQ1+L-글루타민+비타민믹스(장건강/면역)", allergen:"닭" },
+  { id:"Easycare06-SET", name:"이지케어 멀티바이오틱스 3곽", form:"츄르", type:"영양제", line:"이지케어", target:"겸용", size:"8g×10스틱×3곽", price_n:32700, price_f:26700, protein:9, fat:0.1, calcium:0.005, phosphorus:0.05, fiber:0.50, sodium:0.89, moisture:60, calories:31, main:"닭(대한민국)", sub:"정제수/타피오카전분/열처리유산균(LLQ1,LPQ1)/비타민B12/비타민류/L-글루타민", func:"열처리유산균LLQ1+LPQ1+L-글루타민+비타민믹스(장건강/면역)", allergen:"닭", parent:"Easycare06", isBundle:true },
+  { id:"Easycare07", name:"이지케어 데일리 프레쉬", form:"가루", type:"영양제", line:"이지케어", target:"겸용", size:"30g", price_n:23000, price_f:20700, protein:2.7, fat:0, calcium:0, phosphorus:0, fiber:0.10, sodium:0.14, moisture:0, calories:0, main:"Blis K12/Blis M18(뉴질랜드)", sub:"이소말트/말토덱스트린/이소말토올리고당", func:"Blis K12+Blis M18(구강건강/충치예방/입냄새제거)", allergen:"없음" },
+  { id:"Easycare07-SET", name:"이지케어 데일리 프레쉬 3곽", form:"가루", type:"영양제", line:"이지케어", target:"겸용", size:"30g×3곽", price_n:69000, price_f:58900, protein:2.7, fat:0, calcium:0, phosphorus:0, fiber:0.10, sodium:0.14, moisture:0, calories:0, main:"Blis K12/Blis M18(뉴질랜드)", sub:"이소말트/말토덱스트린/이소말토올리고당", func:"Blis K12+Blis M18(구강건강/충치예방/입냄새제거)", allergen:"없음", parent:"Easycare07", isBundle:true },
+  { id:"Easycare08", name:"이지케어 신장", form:"가루", type:"영양제", line:"이지케어", target:"겸용", size:"60g", price_n:24900, price_f:22000, protein:0.8, fat:0.4, calcium:0.008, phosphorus:0.032, fiber:0.20, sodium:0.14, moisture:0, calories:0, main:"SYNPET TRENAL(대만)", sub:"이소말트/키토산/차전자피분말/7종혼합유산균", func:"SYNPET TRENAL+키토산+유산균7종(신장기능지원)", allergen:"키토산" },
+  { id:"Easycare08-SET", name:"이지케어 신장 3곽", form:"가루", type:"영양제", line:"이지케어", target:"겸용", size:"60g×3곽", price_n:74700, price_f:62700, protein:0.8, fat:0.4, calcium:0.008, phosphorus:0.032, fiber:0.20, sodium:0.14, moisture:0, calories:0, main:"SYNPET TRENAL(대만)", sub:"이소말트/키토산/차전자피분말/7종혼합유산균", func:"SYNPET TRENAL+키토산+유산균7종(신장기능지원)", allergen:"키토산", parent:"Easycare08", isBundle:true },
+  { id:"Easycare09", name:"이지케어 나이트 120g", form:"져키", type:"영양제", line:"이지케어", target:"강아지", size:"120g", price_n:29500, price_f:26500, protein:5.5, fat:1.0, calcium:0.02, phosphorus:0.05, fiber:1.5, sodium:0.23, moisture:60, calories:409, main:"쌀가루(대한민국)/산양유(네덜란드)", sub:"귀리분말/단호박/고구마페이스트/프락토올리고당/오메가-3/강황/유산균/밀크씨슬/L-테아닌/L-트립토판/GABA/크랜베리/혼합토코페롤", func:"강황+유산균+밀크씨슬+L-테아닌+L-트립토판+GABA+크랜베리(수면안정/분리불안완화)", allergen:"산양유" },
+  // ─── 집중케어 ───
+  { id:"Focusedcare01", name:"집중케어 프로바이오틱스", form:"가루", type:"영양제", line:"집중케어", target:"겸용", size:"2g×30스틱", price_n:28000, price_f:22800, protein:1.9, fat:1.3, calcium:0, phosphorus:0.06, fiber:0.01, sodium:0.14, moisture:0, calories:0, main:"Lactobacillus Acidophilus/Lacticaseibacillus Rhamnosus", sub:"프락토올리고당/이소말트/갈락토올리고당/슈퍼스트레인균주/다니스코17종혼합유산균", func:"슈퍼스트레인+다니스코17종유산균(장내환경개선/면역강화)", allergen:"없음" },
+  { id:"Focusedcare01-SET", name:"집중케어 프로바이오틱스 3곽", form:"가루", type:"영양제", line:"집중케어", target:"겸용", size:"2g×30스틱×3곽", price_n:84000, price_f:65400, protein:1.9, fat:1.3, calcium:0, phosphorus:0.06, fiber:0.01, sodium:0.14, moisture:0, calories:0, main:"Lactobacillus Acidophilus/Lacticaseibacillus Rhamnosus", sub:"프락토올리고당/이소말트/갈락토올리고당/슈퍼스트레인균주/다니스코17종혼합유산균", func:"슈퍼스트레인+다니스코17종유산균(장내환경개선/면역강화)", allergen:"없음", parent:"Focusedcare01", isBundle:true },
+  { id:"Focusedcare02", name:"집중케어 헤어볼과 식이섬유", form:"가루", type:"영양제", line:"집중케어", target:"겸용", size:"2g×30스틱", price_n:12000, price_f:9500, protein:3.7, fat:0.4, calcium:0.05, phosphorus:0.08, fiber:1.3, sodium:0.14, moisture:0, calories:0, main:"없음", sub:"이소말트/이소말토올리고당/차전자피분말/귀리식이섬유/유기농새싹보리분말/프락토올리고당", func:"차전자피+귀리식이섬유+유기농새싹분말+이눌린+프락토올리고당(변비개선/헤어볼배출)", allergen:"없음" },
+  { id:"Focusedcare02-SET", name:"집중케어 헤어볼과 식이섬유 3곽", form:"가루", type:"영양제", line:"집중케어", target:"겸용", size:"2g×30스틱×3곽", price_n:36000, price_f:27000, protein:3.7, fat:0.4, calcium:0.05, phosphorus:0.08, fiber:1.3, sodium:0.14, moisture:0, calories:0, main:"없음", sub:"이소말트/이소말토올리고당/차전자피분말/귀리식이섬유/유기농새싹보리분말/프락토올리고당", func:"차전자피+귀리식이섬유+유기농새싹분말+이눌린+프락토올리고당(변비개선/헤어볼배출)", allergen:"없음", parent:"Focusedcare02", isBundle:true },
+  { id:"Focusedcare03", name:"rTG 퓨어 오메가-3", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×90캡슐", price_n:16000, price_f:14400, protein:15.9, fat:43.2, calcium:0.001, phosphorus:0.001, fiber:0.90, sodium:0.043, moisture:0, calories:0, main:"어유(오메가-3)/비타민E(스페인솔루텍스) 캐나다VIVA제조", sub:"fish젤라틴/글리세린/정제수/비타민E", func:"EPA73.33mg+DHA36.67mg/비타민E(항산화) — 순수오메가-3", allergen:"생선" },
+  { id:"Focusedcare03-SET", name:"rTG 퓨어 오메가-3 3곽", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×90캡슐×3곽", price_n:48000, price_f:41000, protein:15.9, fat:43.2, calcium:0.001, phosphorus:0.001, fiber:0.90, sodium:0.043, moisture:0, calories:0, main:"어유(오메가-3)/비타민E(스페인솔루텍스) 캐나다VIVA제조", sub:"fish젤라틴/글리세린/정제수/비타민E", func:"EPA73.33mg+DHA36.67mg/비타민E(항산화) — 순수오메가-3", allergen:"생선", parent:"Focusedcare03", isBundle:true },
+  { id:"Focusedcare04", name:"rTG 레드 오메가-3 mini 통", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×120캡슐", price_n:29500, price_f:26500, protein:15.9, fat:50, calcium:0.001, phosphorus:0.001, fiber:0.90, sodium:0.043, moisture:0, calories:0, main:"어유(오메가-3)/비타민E/아스타잔틴(스페인솔루텍스) 캐나다VIVA제조", sub:"fish젤라틴/글리세린/정제수/비타민E", func:"EPA66mg+DHA44mg+아스타잔틴5mg+비타민E — 오메가-3+항산화 복합", allergen:"생선" },
+  { id:"Focusedcare04-SET", name:"rTG 레드 오메가-3 mini 통 3곽", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×120캡슐×3곽", price_n:88500, price_f:75500, protein:15.9, fat:50, calcium:0.001, phosphorus:0.001, fiber:0.90, sodium:0.043, moisture:0, calories:0, main:"어유(오메가-3)/비타민E/아스타잔틴(스페인솔루텍스) 캐나다VIVA제조", sub:"fish젤라틴/글리세린/정제수/비타민E", func:"EPA66mg+DHA44mg+아스타잔틴5mg+비타민E — 오메가-3+항산화 복합", allergen:"생선", parent:"Focusedcare04", isBundle:true },
+  { id:"Focusedcare05", name:"rTG 레드 오메가-3 mini 블리스터 30캡슐", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×30캡슐", price_n:11000, price_f:9900, protein:15.9, fat:50, calcium:0.001, phosphorus:0.001, fiber:0.90, sodium:0.043, moisture:0, calories:0, main:"어유(오메가-3)/비타민E/아스타잔틴 캐나다VIVA제조", sub:"fish젤라틴/글리세린/정제수/비타민E", func:"EPA66mg+DHA44mg+아스타잔틴5mg — 소용량 체험/입문용", allergen:"생선" },
+  { id:"Focusedcare05-SET", name:"rTG 레드 오메가-3 mini 블리스터 5곽", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×30캡슐×5곽", price_n:55000, price_f:44500, protein:15.9, fat:50, calcium:0.001, phosphorus:0.001, fiber:0.90, sodium:0.043, moisture:0, calories:0, main:"어유(오메가-3)/비타민E/아스타잔틴 캐나다VIVA제조", sub:"fish젤라틴/글리세린/정제수/비타민E", func:"EPA66mg+DHA44mg+아스타잔틴5mg — 소용량 체험/입문용", allergen:"생선", parent:"Focusedcare05", isBundle:true },
+  { id:"Focusedcare06", name:"rTG 레드 오메가-3 6oval 미디움", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"6oval×30캡슐", price_n:29500, price_f:26500, protein:15.9, fat:55, calcium:0.001, phosphorus:0.001, fiber:0.90, sodium:0.023, moisture:0, calories:0, main:"어유(오메가-3)/비타민E/아스타잔틴 캐나다VIVA제조", sub:"fish젤라틴/글리세린/정제수/비타민E", func:"EPA163.2mg+DHA108.8mg+아스타잔틴10mg — 고용량(대형견·중증케어)", allergen:"생선" },
+  { id:"Focusedcare06-SET", name:"rTG 레드 오메가-3 6oval 미디움 3곽", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"6oval×30캡슐×3곽", price_n:88500, price_f:75500, protein:15.9, fat:55, calcium:0.001, phosphorus:0.001, fiber:0.90, sodium:0.023, moisture:0, calories:0, main:"어유(오메가-3)/비타민E/아스타잔틴 캐나다VIVA제조", sub:"fish젤라틴/글리세린/정제수/비타민E", func:"EPA163.2mg+DHA108.8mg+아스타잔틴10mg — 고용량(대형견·중증케어)", allergen:"생선", parent:"Focusedcare06", isBundle:true },
+  { id:"Focusedcare07", name:"보타닉 항산화제", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×60캡슐", price_n:38000, price_f:32300, protein:18, fat:33.1, calcium:0.001, phosphorus:0.001, fiber:1.5, sodium:0.065, moisture:0, calories:0, main:"어유(오메가-3)/밀크씨슬/아마씨유 캐나다VIVA제조", sub:"fish젤라틴/대두레시틴/비타민E/카르니틴/고지베리/코엔자임Q10/호손베리/크랜베리/포스파티딜세린/비타민C", func:"밀크씨슬+카르니틴+코엔자임Q10+호손베리+포스파티딜세린+비타민C(간보호/항산화/인지기능)", allergen:"생선" },
+  { id:"Focusedcare07-SET", name:"보타닉 항산화제 3곽", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×60캡슐×3곽", price_n:114000, price_f:92000, protein:18, fat:33.1, calcium:0.001, phosphorus:0.001, fiber:1.5, sodium:0.065, moisture:0, calories:0, main:"어유(오메가-3)/밀크씨슬/아마씨유 캐나다VIVA제조", sub:"fish젤라틴/대두레시틴/비타민E/카르니틴/고지베리/코엔자임Q10/호손베리/크랜베리/포스파티딜세린/비타민C", func:"밀크씨슬+카르니틴+코엔자임Q10+호손베리+포스파티딜세린+비타민C(간보호/항산화/인지기능)", allergen:"생선", parent:"Focusedcare07", isBundle:true },
+  { id:"Focusedcare08", name:"파이퍼 눈 보조제", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×60캡슐", price_n:35000, price_f:27000, protein:7.91, fat:33.79, calcium:0.001, phosphorus:0.001, fiber:2.84, sodium:0.0995, moisture:0, calories:0, main:"빌베리추출물/금잔화추출물/아스타잔틴 이탈리아INDENA 캐나다VIVA제조", sub:"fish젤라틴/글리세린/비타민E/아마씨유/포도씨종자추출물/베타카로틴/퀘르세틴/레시틴/아스코르빈산칼슘", func:"빌베리+금잔화+아스타잔틴+베타카로틴+포도씨추출물(눈건강/시력보호)", allergen:"생선" },
+  { id:"Focusedcare08-SET", name:"파이퍼 눈 보조제 3곽", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×60캡슐×3곽", price_n:99700, price_f:76900, protein:7.91, fat:33.79, calcium:0.001, phosphorus:0.001, fiber:2.84, sodium:0.0995, moisture:0, calories:0, main:"빌베리추출물/금잔화추출물/아스타잔틴 이탈리아INDENA 캐나다VIVA제조", sub:"fish젤라틴/글리세린/비타민E/아마씨유/포도씨종자추출물/베타카로틴/퀘르세틴/레시틴/아스코르빈산칼슘", func:"빌베리+금잔화+아스타잔틴+베타카로틴+포도씨추출물(눈건강/시력보호)", allergen:"생선", parent:"Focusedcare08", isBundle:true },
+  { id:"Focusedcare09", name:"커큐젠 관절 보조제", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×30캡슐", price_n:24000, price_f:19500, protein:8, fat:39, calcium:0.001, phosphorus:0.001, fiber:5, sodium:0.105, moisture:0, calories:0, main:"블랙커민오일/레시틴/보스웰리아추출물/커큐민파이토솜 캐나다VIVA제조", sub:"fish젤라틴/글리세린/비타민E/초록입홍합오일/킬레이트망간/UC-II콜라겐/히알루론산", func:"블랙커민+보스웰리아+커큐민파이토솜+초록입홍합+UC-II콜라겐+히알루론산(관절건강)", allergen:"생선" },
+  { id:"Focusedcare09-SET", name:"커큐젠 관절 보조제 3곽", form:"캡슐", type:"영양제", line:"집중케어", target:"겸용", size:"3oval×30캡슐×3곽", price_n:68400, price_f:54900, protein:8, fat:39, calcium:0.001, phosphorus:0.001, fiber:5, sodium:0.105, moisture:0, calories:0, main:"블랙커민오일/레시틴/보스웰리아추출물/커큐민파이토솜 캐나다VIVA제조", sub:"fish젤라틴/글리세린/비타민E/초록입홍합오일/킬레이트망간/UC-II콜라겐/히알루론산", func:"블랙커민+보스웰리아+커큐민파이토솜+초록입홍합+UC-II콜라겐+히알루론산(관절건강)", allergen:"생선", parent:"Focusedcare09", isBundle:true },
+  // ─── 미니트릿 (가격 업데이트: Treat05/13/14/20) ───
+  { id:"Treat01", name:"미니트릿 제주 무항생제 닭 25g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"25g", price_n:3500, price_f:3200, protein:89, fat:5.5, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"닭(대한민국 제주 무항생제)", sub:"없음", func:"단일원료/무항생제닭/고단백저지방/동결건조", allergen:"닭" },
+  { id:"Treat02", name:"미니트릿 제주 무항생제 닭 80g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"80g", price_n:9700, price_f:8500, protein:89, fat:5.5, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"닭(대한민국 제주 무항생제)", sub:"없음", func:"단일원료/무항생제닭/고단백저지방/동결건조", allergen:"닭" },
+  { id:"Treat03-SET", name:"미니트릿 제주 무항생제 닭 240g 3팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"240g×3팩", price_n:87300, price_f:63900, protein:89, fat:5.5, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"닭(대한민국 제주 무항생제)", sub:"없음", func:"단일원료/무항생제닭/고단백저지방/동결건조", allergen:"닭", isBundle:true },
+  { id:"Treat04", name:"미니트릿 알래스카 북어 17g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"17g", price_n:3500, price_f:3200, protein:88, fat:2.9, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"명태(태평양 알래스카)", sub:"없음", func:"단일원료/고단백초저지방/타우린풍부/동결건조", allergen:"북어" },
+  { id:"Treat05", name:"미니트릿 알래스카 북어 50g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"50g", price_n:9700, price_f:9000, protein:88, fat:2.9, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"명태(태평양 알래스카)", sub:"없음", func:"단일원료/고단백초저지방/타우린풍부/동결건조", allergen:"북어" },
+  { id:"Treat06-SET", name:"미니트릿 알래스카 북어 150g 3팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"150g×3팩", price_n:82800, price_f:62100, protein:88, fat:2.9, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"명태(태평양 알래스카)", sub:"없음", func:"단일원료/고단백초저지방/타우린풍부/동결건조", allergen:"북어", isBundle:true },
+  { id:"Treat07", name:"미니트릿 네덜란드 산양유 20g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"20g", price_n:4900, price_f:4200, protein:70, fat:10, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"닭(대한민국)/산양유(뉴질랜드)", sub:"없음", func:"산양유(소화/면역)/고단백/동결건조", allergen:"닭/산양유" },
+  { id:"Treat08", name:"미니트릿 네덜란드 산양유 65g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"65g", price_n:12000, price_f:11500, protein:70, fat:10, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"닭(대한민국)/산양유(뉴질랜드)", sub:"없음", func:"산양유(소화/면역)/고단백/동결건조", allergen:"닭/산양유" },
+  { id:"Treat09-SET", name:"미니트릿 네덜란드 산양유 195g 3팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"195g×3팩", price_n:108000, price_f:81200, protein:70, fat:10, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"닭(대한민국)/산양유(뉴질랜드)", sub:"없음", func:"산양유(소화/면역)/고단백/동결건조", allergen:"닭/산양유", isBundle:true },
+  { id:"Treat10", name:"미니트릿 태평양 가자미 17g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"17g", price_n:3300, price_f:3000, protein:60, fat:38, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"가자미(태평양)", sub:"없음", func:"단일원료/생선단백질/동결건조", allergen:"가자미" },
+  { id:"Treat11", name:"미니트릿 태평양 가자미 55g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"55g", price_n:8800, price_f:6900, protein:60, fat:38, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"가자미(태평양)", sub:"없음", func:"단일원료/생선단백질/동결건조", allergen:"가자미" },
+  { id:"Treat12-SET", name:"미니트릿 태평양 가자미 195g 3팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"195g×3팩", price_n:93600, price_f:62700, protein:60, fat:38, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"가자미(태평양)", sub:"없음", func:"단일원료/생선단백질/동결건조", allergen:"가자미", isBundle:true },
+  { id:"Treat13", name:"미니트릿 호주 자연방목 소고기 22g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"22g", price_n:6000, price_f:5500, protein:80, fat:10, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"홍두깨살(호주 자연방목)", sub:"없음", func:"단일원료/호주자연방목소고기/고단백/동결건조", allergen:"소고기" },
+  { id:"Treat14", name:"미니트릿 호주 자연방목 소고기 80g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"80g", price_n:17000, price_f:16000, protein:80, fat:10, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"홍두깨살(호주 자연방목)", sub:"없음", func:"단일원료/호주자연방목소고기/고단백/동결건조", allergen:"소고기" },
+  { id:"Treat15-SET", name:"미니트릿 호주 자연방목 소고기 240g 3팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"240g×3팩", price_n:139500, price_f:108300, protein:80, fat:10, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"홍두깨살(호주 자연방목)", sub:"없음", func:"단일원료/호주자연방목소고기/고단백/동결건조", allergen:"소고기", isBundle:true },
+  { id:"Treat23", name:"미니트릿 알래스카 연어 22g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"22g", price_n:4500, price_f:4000, protein:55, fat:26, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"연어(알래스카)", sub:"없음", func:"단일원료/연어오메가-3/고단백/동결건조", allergen:"연어" },
+  { id:"Treat25-SET", name:"미니트릿 알래스카 연어 210g 3팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"210g×3팩", price_n:100800, price_f:79800, protein:55, fat:26, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:0, main:"연어(알래스카)", sub:"없음", func:"단일원료/연어오메가-3/고단백/동결건조", allergen:"연어", isBundle:true },
+  { id:"Treat18", name:"메가트릿 닭안심 90g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"90g", price_n:12000, price_f:11000, protein:88, fat:3.8, calcium:0, phosphorus:0, fiber:0, sodium:0.033, moisture:0, calories:465, main:"닭(대한민국)", sub:"없음", func:"단일원료/대용량/동결건조/훈련용간식", allergen:"닭" },
+  { id:"Treat18-SET", name:"메가트릿 닭안심 90g 3팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"90g×3팩", price_n:36000, price_f:31000, protein:88, fat:3.8, calcium:0, phosphorus:0, fiber:0, sodium:0.033, moisture:0, calories:465, main:"닭(대한민국)", sub:"없음", func:"단일원료/대용량/동결건조/훈련용간식", allergen:"닭", parent:"Treat18", isBundle:true },
+  { id:"Treat19", name:"메가트릿 북어스틱 90g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"90g", price_n:12000, price_f:11000, protein:88, fat:2.9, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:440, main:"명태(러시아)", sub:"없음", func:"단일원료/대용량/초저지방/동결건조", allergen:"북어" },
+  { id:"Treat19-SET", name:"메가트릿 북어스틱 90g 3팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"90g×3팩", price_n:36000, price_f:31000, protein:88, fat:2.9, calcium:0, phosphorus:0, fiber:0, sodium:0.05, moisture:0, calories:440, main:"명태(러시아)", sub:"없음", func:"단일원료/대용량/초저지방/동결건조", allergen:"북어", parent:"Treat19", isBundle:true },
+  { id:"Treat20", name:"조공 양미리 2마리 15g", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"15g", price_n:3200, price_f:3000, protein:56.8, fat:17.7, calcium:0, phosphorus:0, fiber:0, sodium:0.036, moisture:0, calories:75, main:"양미리(대한민국)", sub:"없음", func:"통째로동결건조/칼슘·오메가-3", allergen:"양미리" },
+  { id:"Treat20-SET", name:"조공 양미리 2마리 5팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"겸용", size:"15g×5팩", price_n:15000, price_f:13000, protein:56.8, fat:17.7, calcium:0, phosphorus:0, fiber:0, sodium:0.036, moisture:0, calories:75, main:"양미리(대한민국)", sub:"없음", func:"통째로동결건조/칼슘·오메가-3", allergen:"양미리", parent:"Treat20", isBundle:true },
+  { id:"Treat22", name:"스페셜 트릿 오골계 닭발 30g", form:"트릿", type:"동결건조", line:"미니트릿", target:"강아지", size:"30g", price_n:6000, price_f:5700, protein:45, fat:20, calcium:0, phosphorus:0, fiber:0, sodium:0.10, moisture:0, calories:137, main:"오골계 닭발(대한민국)", sub:"없음", func:"천연콜라겐(관절/피부)/오골계(보양)/동결건조", allergen:"닭" },
+  { id:"Treat22-SET1", name:"스페셜 트릿 오골계 닭발 5팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"강아지", size:"30g×5팩", price_n:30000, price_f:26000, protein:45, fat:20, calcium:0, phosphorus:0, fiber:0, sodium:0.10, moisture:0, calories:137, main:"오골계 닭발(대한민국)", sub:"없음", func:"천연콜라겐(관절/피부)/오골계(보양)/동결건조", allergen:"닭", parent:"Treat22", isBundle:true },
+  { id:"Treat22-SET2", name:"스페셜 트릿 오골계 닭발 10팩", form:"트릿", type:"동결건조", line:"미니트릿", target:"강아지", size:"30g×10팩", price_n:60000, price_f:46000, protein:45, fat:20, calcium:0, phosphorus:0, fiber:0, sodium:0.10, moisture:0, calories:137, main:"오골계 닭발(대한민국)", sub:"없음", func:"천연콜라겐(관절/피부)/오골계(보양)/동결건조", allergen:"닭", parent:"Treat22", isBundle:true },
+  // ─── 터키츄 ───
+  { id:"Turkey01", name:"꿀홍삼 터키츄 링 10g", form:"터키츄", type:"츄잉", line:"터키츄", target:"강아지", size:"10g", price_n:3400, price_f:3300, protein:67, fat:6, calcium:0, phosphorus:0, fiber:0.2, sodium:0.14, moisture:0, calories:0, main:"칠면조힘줄", sub:"마누카꿀/홍삼", func:"마누카꿀(항균/구강)+홍삼(면역)/천연칠면조힘줄(치아)/저지방", allergen:"칠면조" },
+  { id:"Turkey01-SET1", name:"꿀홍삼 터키츄 링 5팩", form:"터키츄", type:"츄잉", line:"터키츄", target:"강아지", size:"10g×5팩", price_n:17000, price_f:16000, protein:67, fat:6, calcium:0, phosphorus:0, fiber:0.2, sodium:0.14, moisture:0, calories:0, main:"칠면조힘줄", sub:"마누카꿀/홍삼", func:"마누카꿀(항균/구강)+홍삼(면역)/천연칠면조힘줄(치아)/저지방", allergen:"칠면조", parent:"Turkey01", isBundle:true },
+  { id:"Turkey01-SET2", name:"꿀홍삼 터키츄 링 10팩", form:"터키츄", type:"츄잉", line:"터키츄", target:"강아지", size:"10g×10팩", price_n:34000, price_f:28500, protein:67, fat:6, calcium:0, phosphorus:0, fiber:0.2, sodium:0.14, moisture:0, calories:0, main:"칠면조힘줄", sub:"마누카꿀/홍삼", func:"마누카꿀(항균/구강)+홍삼(면역)/천연칠면조힘줄(치아)/저지방", allergen:"칠면조", parent:"Turkey01", isBundle:true },
+  { id:"Turkey02", name:"꿀홍삼 터키츄 스틱 30g", form:"터키츄", type:"츄잉", line:"터키츄", target:"강아지", size:"30g", price_n:7400, price_f:7300, protein:67, fat:6, calcium:0, phosphorus:0, fiber:0.2, sodium:0.14, moisture:0, calories:0, main:"칠면조힘줄", sub:"마누카꿀/홍삼", func:"마누카꿀(항균/구강)+홍삼(면역)/천연칠면조힘줄(치아)/저지방", allergen:"칠면조" },
+  { id:"Turkey02-SET1", name:"꿀홍삼 터키츄 스틱 5팩", form:"터키츄", type:"츄잉", line:"터키츄", target:"강아지", size:"30g×5팩", price_n:37000, price_f:35000, protein:67, fat:6, calcium:0, phosphorus:0, fiber:0.2, sodium:0.14, moisture:0, calories:0, main:"칠면조힘줄", sub:"마누카꿀/홍삼", func:"마누카꿀(항균/구강)+홍삼(면역)/천연칠면조힘줄(치아)/저지방", allergen:"칠면조", parent:"Turkey02", isBundle:true },
+  { id:"Turkey02-SET2", name:"꿀홍삼 터키츄 스틱 10팩", form:"터키츄", type:"츄잉", line:"터키츄", target:"강아지", size:"30g×10팩", price_n:74000, price_f:68000, protein:67, fat:6, calcium:0, phosphorus:0, fiber:0.2, sodium:0.14, moisture:0, calories:0, main:"칠면조힘줄", sub:"마누카꿀/홍삼", func:"마누카꿀(항균/구강)+홍삼(면역)/천연칠면조힘줄(치아)/저지방", allergen:"칠면조", parent:"Turkey02", isBundle:true },
+  // ─── 덴탈껌 (가격 업데이트) ───
+  { id:"Gum01", name:"산양유 덴탈껌 140g", form:"껌", type:"츄잉", line:"덴탈껌", target:"강아지", size:"10g×14개", price_n:11900, price_f:9900, protein:3, fat:3, calcium:0.01, phosphorus:0.01, fiber:12, sodium:0.18, moisture:0, calories:0, main:"쌀가루(대한민국)/산양유(네덜란드)", sub:"셀룰로오스/프로필렌글리콜/글리세린/코코넛오일/헥사메타인산염(SHMP)/비타민E/비타민C/소르빈산칼륨", func:"헥사메타인산염(치석제거)+셀룰로오스(치아마찰)/산양유/비타민C+E(항산화)", allergen:"산양유" },
+  { id:"Gum01-SET1", name:"산양유 덴탈껌 140g 3팩", form:"껌", type:"츄잉", line:"덴탈껌", target:"강아지", size:"10g×14개×3팩", price_n:34600, price_f:28500, protein:3, fat:3, calcium:0.01, phosphorus:0.01, fiber:12, sodium:0.18, moisture:0, calories:0, main:"쌀가루(대한민국)/산양유(네덜란드)", sub:"셀룰로오스/프로필렌글리콜/글리세린/코코넛오일/헥사메타인산염(SHMP)/비타민E/비타민C/소르빈산칼륨", func:"헥사메타인산염(치석제거)+셀룰로오스(치아마찰)/산양유/비타민C+E(항산화)", allergen:"산양유", parent:"Gum01", isBundle:true },
+  { id:"Gum01-SET2", name:"산양유 덴탈껌 140g 5팩", form:"껌", type:"츄잉", line:"덴탈껌", target:"강아지", size:"10g×14개×5팩", price_n:59500, price_f:46000, protein:3, fat:3, calcium:0.01, phosphorus:0.01, fiber:12, sodium:0.18, moisture:0, calories:0, main:"쌀가루(대한민국)/산양유(네덜란드)", sub:"셀룰로오스/프로필렌글리콜/글리세린/코코넛오일/헥사메타인산염(SHMP)/비타민E/비타민C/소르빈산칼륨", func:"헥사메타인산염(치석제거)+셀룰로오스(치아마찰)/산양유/비타민C+E(항산화)", allergen:"산양유", parent:"Gum01", isBundle:true },
+  // ─── 양갱 ───
+  { id:"yokan01", name:"[강아지] 산양유 양갱 관절", form:"양갱", type:"양갱", line:"양갱", target:"강아지", size:"8g×4스틱", price_n:2500, price_f:2000, protein:8, fat:0.8, calcium:0.04, phosphorus:0.08, fiber:1.0, sodium:0.87, moisture:60, calories:37, main:"닭가슴살(대한민국)/산양유분말(뉴질랜드)", sub:"정제수/타피오카전분/한천/아마씨분말/상어연골분말/글루코사민황산염", func:"글루코사민+상어연골+아마씨(관절건강)/산양유", allergen:"닭/산양유" },
+  { id:"yokan02", name:"[강아지] 산양유 양갱 장", form:"양갱", type:"양갱", line:"양갱", target:"강아지", size:"8g×4스틱", price_n:2500, price_f:2000, protein:8, fat:0.8, calcium:0.04, phosphorus:0.08, fiber:1.0, sodium:0.87, moisture:60, calories:37, main:"닭가슴살(대한민국)/산양유분말(뉴질랜드)", sub:"정제수/타피오카전분/한천/유산균", func:"유산균(장건강)/산양유(소화흡수)", allergen:"닭/산양유" },
+  { id:"yokan03", name:"[강아지] 산양유 양갱 피모", form:"양갱", type:"양갱", line:"양갱", target:"강아지", size:"8g×4스틱", price_n:2500, price_f:2000, protein:8, fat:0.8, calcium:0.04, phosphorus:0.08, fiber:1.0, sodium:0.87, moisture:60, calories:37, main:"닭가슴살(대한민국)/산양유분말(뉴질랜드)", sub:"정제수/타피오카전분/한천/저분자피쉬콜라겐/코코넛오일/오메가-3", func:"저분자피쉬콜라겐+오메가-3+코코넛오일(피부/모질개선)/산양유", allergen:"닭/산양유" },
+  { id:"yokan05", name:"[고양이] 산양유 양갱 면역", form:"양갱", type:"양갱", line:"양갱", target:"고양이", size:"8g×4스틱", price_n:2500, price_f:2000, protein:8.5, fat:1.0, calcium:0.03, phosphorus:0.05, fiber:1.0, sodium:0.89, moisture:60, calories:9, main:"닭가슴살(대한민국)/산양유분말(뉴질랜드)", sub:"정제수/타피오카전분/한천/후코이단/타우린/유산균", func:"후코이단+타우린+유산균(면역강화)/산양유(소화)", allergen:"닭/산양유" },
+];
+
+/* ============================================================
+   DISEASE DATA — 피해야 할 성분 기반 랭킹
+   ============================================================ */
+const DISEASES = [
+  { name:"신장병", icon:"🫘",
+    avoid_fields:[{field:"phosphorus",label:"인(P)"},{field:"protein",label:"단백질"},{field:"sodium",label:"나트륨"}],
+    help_kw:["오메가-3","비타민B","신장","TRENAL"],
+    avoid_kw:[], desc:"인·단백질·나트륨이 낮은 제품 + 오메가-3 함유 제품 우선 추천합니다." },
+  { name:"심장병", icon:"❤️",
+    avoid_fields:[{field:"sodium",label:"나트륨"}],
+    help_kw:["타우린","코엔자임Q10","오메가-3"],
+    avoid_kw:[], desc:"나트륨이 낮은 제품 + 타우린·코엔자임Q10 함유 제품 우선 추천합니다." },
+  { name:"췌장염", icon:"🟡",
+    avoid_fields:[{field:"fat",label:"지방"}],
+    help_kw:["오메가-3","비타민E"],
+    avoid_kw:[], desc:"지방 함량이 낮은 제품 + 오메가-3 함유 제품 우선 추천합니다." },
+  { name:"당뇨병", icon:"💉",
+    avoid_fields:[],
+    help_kw:["식이섬유","귀리","아연","프락토올리고당","새싹보리","이눌린"],
+    avoid_kw:["과당","단순당"], desc:"식이섬유가 풍부한 제품 우선 추천합니다." },
+  { name:"결석", icon:"🔮",
+    avoid_fields:[{field:"phosphorus",label:"인(P)"},{field:"calcium",label:"칼슘"}],
+    help_kw:["오메가-3","크랜베리","D-만노오스","NAG"],
+    avoid_kw:[], desc:"인·칼슘이 낮은 제품 + 크랜베리·NAG 함유 제품 우선 추천합니다." },
+  { name:"간질환", icon:"🍋",
+    avoid_fields:[{field:"sodium",label:"나트륨"},{field:"protein",label:"단백질"}],
+    help_kw:["밀크씨슬","카르니틴","포스파티딜세린"],
+    avoid_kw:[], desc:"나트륨·단백질이 낮은 제품 + 밀크씨슬 함유 제품 우선 추천합니다." },
+  { name:"갑상선", icon:"🦋",
+    avoid_fields:[],
+    help_kw:[],
+    avoid_kw:["켈프","kelp","다시마","해조류"], desc:"켈프·해조류가 포함되지 않은 제품 우선 추천합니다." },
+  { name:"관절질환", icon:"🦴",
+    avoid_fields:[{field:"calories",label:"칼로리"}],
+    help_kw:["글루코사민","초록입홍합","UC-II콜라겐","히알루론산","뮤코다당","보스웰리아"],
+    avoid_kw:[], desc:"저칼로리 제품 + 글루코사민·초록입홍합 함유 제품 우선 추천합니다." },
+  { name:"분리불안", icon:"😰",
+    avoid_fields:[],
+    help_kw:["L-테아닌","L-트립토판","GABA","발레리안"],
+    avoid_kw:[], desc:"L-테아닌·L-트립토판·발레리안 등 신경안정 성분 함유 제품을 추천합니다." },
+  { name:"인지기능 저하", icon:"🧠",
+    avoid_fields:[],
+    help_kw:["오메가-3","DHA","포스파티딜세린","코엔자임Q10"],
+    avoid_kw:[], desc:"오메가-3·DHA·포스파티딜세린·코엔자임Q10 함유 제품을 추천합니다." },
+];
+
+/* ============================================================
+   NUTRIENT CONFIG — 성분별 추천
+   ============================================================ */
+const NUTRIENTS = [
+  { key:"protein", label:"단백질", unit:"%", desc:"단백질 함량이 낮은 상품", asc:true },
+  { key:"fat", label:"지방", unit:"%", desc:"지방 함량이 낮은 상품", asc:true },
+  { key:"calcium", label:"칼슘", unit:"%", desc:"칼슘 함량이 낮은 상품", asc:true },
+  { key:"phosphorus", label:"인(P)", unit:"%", desc:"인 함량이 낮은 상품", asc:true },
+  { key:"sodium", label:"나트륨", unit:"%", desc:"나트륨 함량이 낮은 상품", asc:true },
+  { key:"calories", label:"칼로리", unit:"kcal", desc:"칼로리가 낮은 상품", asc:true },
+  { key:"ca_p_ratio", label:"칼슘/인 비율", unit:"", desc:"칼슘/인 비율이 1.2:1에 가장 가까운 상품", asc:false, ratio:true },
+];
+
+const TYPE_GROUPS = [
+  { label:"🥫 주식캔", types:["주식캔"] },
+  { label:"🥢 간식캔·습식간식", types:["간식캔","습식간식"] },
+  { label:"🥩 동결건조", types:["동결건조"] },
+  { label:"🧁 양갱·츄잉", types:["양갱","츄잉"] },
+  { label:"💊 영양제", types:["영양제"] },
+];
+
+/* ============================================================
+   CONSTANTS & UTILS
+   ============================================================ */
+const LINE_COLORS = {
+  "필로":"#1A7A4E","소피":"#B8860B","동네고양이":"#C0602B","한방보양":"#7B2459",
+  "좋아해":"#3A8A50","리틀제주":"#1565A0","오키로스틱":"#5B3FA6","이지케어":"#1A56A0",
+  "집중케어":"#C0392B","미니트릿":"#6A3094","터키츄":"#9A6520","덴탈껌":"#0878A4","양갱":"#A01650"
+};
+const TYPE_BADGE = {
+  "주식캔":"#1A7A4E","간식캔":"#1565A0","습식간식":"#5B3FA6","동결건조":"#9A6520",
+  "영양제":"#C0392B","츄잉":"#0878A4","양갱":"#A01650"
+};
+const pMap = {};
+PRODUCTS.forEach(p => { pMap[p.id] = p; });
+
+function fmt(n) { return n ? n.toLocaleString("ko-KR")+"원" : "-"; }
+function fmtDisc(pn, pf) { return pn>0?Math.round((1-pf/pn)*100):0; }
+
+function Badge({ label, color }) {
+  return <span style={{ background:color+"18", color, border:`1px solid ${color}38`, borderRadius:4, fontSize:11, fontWeight:700, padding:"2px 7px", whiteSpace:"nowrap" }}>{label}</span>;
+}
+
+/* ============================================================
+   PRODUCT DETAIL MODAL
+   ============================================================ */
+function ProductDetail({ p, onClose }) {
+  if (!p) return null;
+  const lc = LINE_COLORS[p.line]||"#555";
+  const disc = fmtDisc(p.price_n, p.price_f);
+  const nutriItems = [["조단백",p.protein,"%"],["조지방",p.fat,"%"],["나트륨",p.sodium,"%"],["인(P)",p.phosphorus,"%"],["칼슘",p.calcium,"%"],["조섬유",p.fiber,"%"]].filter(([,v])=>v>0);
+  return (
+    <div style={{ position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",zIndex:1000,display:"flex",alignItems:"center",justifyContent:"center",padding:12 }}
+      onClick={e=>e.target===e.currentTarget&&onClose()}>
+      <div style={{ background:"#fff",borderRadius:16,maxWidth:560,width:"100%",maxHeight:"90vh",overflowY:"auto",padding:22,position:"relative" }}>
+        <button onClick={onClose} style={{ position:"absolute",top:14,right:14,background:"#f3f4f6",border:"none",borderRadius:"50%",width:32,height:32,fontSize:18,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center" }}>×</button>
+        <div style={{ display:"flex",gap:5,flexWrap:"wrap",marginBottom:10 }}>
+          <Badge label={p.line} color={lc}/>
+          <Badge label={p.type} color={TYPE_BADGE[p.type]||"#555"}/>
+          <Badge label={p.target==="고양이"?"🐱고양이":p.target==="강아지"?"🐶강아지":"🐾겸용"} color={p.target==="고양이"?"#6B21A8":p.target==="강아지"?"#B45309":"#059669"}/>
+          {p.isBundle && <Badge label="묶음/대용량" color="#D97706"/>}
+        </div>
+        <h2 style={{ fontSize:17,fontWeight:700,color:"#111",marginBottom:4 }}>{p.name}</h2>
+        {/* 용량 + 제형 타입 */}
+        <div style={{ display:"flex",gap:12,fontSize:12,color:"#6b7280",marginBottom:14,flexWrap:"wrap" }}>
+          <span>📦 용량: <b style={{color:"#374151"}}>{p.size}</b></span>
+          {p.form && <span>💧 제형: <b style={{color:"#1A7A4E",background:"#F0FDF4",padding:"1px 7px",borderRadius:4}}>{p.form}</b></span>}
+          {p.parent && <span>📎 단품: <b style={{color:"#6B7280"}}>{p.parent}</b></span>}
+        </div>
+        <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:7,marginBottom:16 }}>
+          {[["박람회가",<b style={{color:"#DC2626",fontSize:15}}>{fmt(p.price_f)}</b>],
+            ["정상가",<span style={{textDecoration:"line-through",color:"#9ca3af"}}>{fmt(p.price_n)}</span>],
+            ["할인율",<b style={{color:"#059669"}}>{disc>0?`-${disc}%`:"없음"}</b>]].map(([k,v],i)=>(
+            <div key={i} style={{ background:"#f9fafb",borderRadius:8,padding:"9px 10px" }}>
+              <div style={{ fontSize:10,color:"#9ca3af",marginBottom:2 }}>{k}</div>
+              <div style={{ fontSize:12 }}>{v}</div>
+            </div>
+          ))}
+        </div>
+        <Sec title="🥩 원료 정보">
+          <Row label="메인원료" val={p.main}/>
+          <Row label="부원료" val={p.sub}/>
+          {p.func&&p.func!=="없음"&&<Row label="기능성원료" val={p.func} hl/>}
+          {p.allergen&&p.allergen!=="없음"&&<Row label="⚠️알레르기주의" val={p.allergen} danger/>}
+        </Sec>
+        {nutriItems.length>0&&(
+          <Sec title="📊 영양성분 (%)">
+            <div style={{ display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:6 }}>
+              {nutriItems.map(([k,v,u])=>(
+                <div key={k} style={{ background:"#EFF6FF",borderRadius:6,padding:"7px 6px",textAlign:"center" }}>
+                  <div style={{ fontSize:10,color:"#3B82F6" }}>{k}</div>
+                  <div style={{ fontSize:13,fontWeight:700,color:"#1D4ED8" }}>{v}{u}</div>
+                </div>
+              ))}
+            </div>
+          </Sec>
+        )}
+        {p.calories>0&&<div style={{ background:"#FFF7ED",borderRadius:8,padding:"7px 12px",fontSize:12,color:"#9A3412" }}>🔥 칼로리: <b>{p.calories}kcal</b></div>}
+      </div>
+    </div>
+  );
+}
+function Sec({title,children}){return(<div style={{marginBottom:13}}><div style={{fontSize:12,fontWeight:700,color:"#374151",paddingBottom:5,borderBottom:"1px solid #f3f4f6",marginBottom:7}}>{title}</div>{children}</div>);}
+function Row({label,val,hl,danger}){if(!val||val==="없음")return null;return(<div style={{display:"flex",gap:7,marginBottom:5,alignItems:"flex-start"}}><span style={{fontSize:11,color:"#9ca3af",minWidth:72,flexShrink:0}}>{label}</span><span style={{fontSize:11,color:danger?"#B91C1C":hl?"#065F46":"#374151",background:danger?"#FEF2F2":hl?"#ECFDF5":"transparent",padding:(hl||danger)?"2px 5px":"0",borderRadius:4,lineHeight:1.5}}>{val}</span></div>);}
+
+function ProductCard({ p, onClick }) {
+  const lc = LINE_COLORS[p.line]||"#555";
+  const disc = fmtDisc(p.price_n,p.price_f);
+  return (
+    <div onClick={()=>onClick(p)} style={{ background:"#fff",border:"1px solid #e5e7eb",borderRadius:12,padding:"13px 14px",cursor:"pointer",display:"flex",flexDirection:"column",gap:6,transition:"box-shadow 0.15s,transform 0.15s" }}
+      onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 16px rgba(0,0,0,0.10)";e.currentTarget.style.transform="translateY(-1px)";}}
+      onMouseLeave={e=>{e.currentTarget.style.boxShadow="none";e.currentTarget.style.transform="translateY(0)";}}>
+      <div style={{ display:"flex",gap:4,flexWrap:"wrap" }}>
+        <Badge label={p.line} color={lc}/>
+        <Badge label={p.form||p.type} color={TYPE_BADGE[p.type]||"#555"}/>
+        {p.isBundle && <Badge label="묶음" color="#D97706"/>}
+        <Badge label={p.target==="고양이"?"🐱":p.target==="강아지"?"🐶":"🐾"} color={p.target==="고양이"?"#6B21A8":p.target==="강아지"?"#B45309":"#059669"}/>
+      </div>
+      <div style={{ fontSize:13,fontWeight:700,color:"#111",lineHeight:1.4 }}>{p.name}</div>
+      <div style={{ fontSize:11,color:"#6b7280" }}>{p.size}</div>
+      <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between" }}>
+        <div style={{ display:"flex",alignItems:"baseline",gap:5 }}>
+          <span style={{ fontSize:15,fontWeight:700,color:"#DC2626" }}>{fmt(p.price_f)}</span>
+          {disc>0&&<span style={{ fontSize:11,color:"#9ca3af",textDecoration:"line-through" }}>{fmt(p.price_n)}</span>}
+        </div>
+        {disc>0&&<span style={{ background:"#FEE2E2",color:"#DC2626",fontSize:11,fontWeight:700,padding:"2px 7px",borderRadius:20 }}>-{disc}%</span>}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SEARCH TAB
+   ============================================================ */
+function SearchTab({ onSelect }) {
+  const [q,setQ]=useState("");
+  const [fil,setFil]=useState("전체");
+  const [typFil,setTypFil]=useState("전체");
+  const TYPES=["전체","주식캔","간식캔","습식간식","동결건조","영양제","양갱","츄잉"];
+  const filtered = useMemo(()=>{
+    let list=PRODUCTS;
+    if(fil!=="전체") list=list.filter(p=>p.target===fil||p.target==="겸용");
+    if(typFil!=="전체") list=list.filter(p=>p.type===typFil);
+    if(q.trim()){
+      const kw=q.trim().toLowerCase();
+      list=list.filter(p=>p.name.toLowerCase().includes(kw)||p.line.toLowerCase().includes(kw)||(p.main||"").toLowerCase().includes(kw)||(p.func||"").toLowerCase().includes(kw)||(p.sub||"").toLowerCase().includes(kw));
+    }
+    return list;
+  },[q,fil,typFil]);
+  return (
+    <div>
+      <input value={q} onChange={e=>setQ(e.target.value)} placeholder="제품명·원료·기능 검색 (예: 연어, 관절, 오메가-3)"
+        style={{ width:"100%",padding:"12px 16px",fontSize:14,border:"2px solid #e5e7eb",borderRadius:10,outline:"none",boxSizing:"border-box",marginBottom:10 }}
+        onFocus={e=>e.target.style.border="2px solid #1A7A4E"} onBlur={e=>e.target.style.border="2px solid #e5e7eb"}/>
+      <div style={{ display:"flex",gap:6,marginBottom:8,flexWrap:"wrap" }}>
+        {["전체","고양이","강아지"].map(f=>(
+          <button key={f} onClick={()=>setFil(f)} style={{ padding:"5px 14px",borderRadius:20,border:"none",cursor:"pointer",fontWeight:700,fontSize:12,background:fil===f?"#1A7A4E":"#f3f4f6",color:fil===f?"#fff":"#374151" }}>
+            {f==="전체"?"🐾전체":f==="고양이"?"🐱고양이":"🐶강아지"}
+          </button>
+        ))}
+      </div>
+      <div style={{ display:"flex",gap:5,marginBottom:12,flexWrap:"wrap" }}>
+        {TYPES.map(t=>(
+          <button key={t} onClick={()=>setTypFil(t)} style={{ padding:"4px 11px",borderRadius:20,border:`1px solid ${typFil===t?"#1A7A4E":"#e5e7eb"}`,cursor:"pointer",fontSize:11,background:typFil===t?"#1A7A4E":"#fff",color:typFil===t?"#fff":"#374151" }}>{t}</button>
+        ))}
+        <span style={{ marginLeft:"auto",fontSize:12,color:"#6b7280",alignSelf:"center" }}>{filtered.length}개</span>
+      </div>
+      {filtered.length===0?<div style={{ textAlign:"center",padding:"40px 0",color:"#9ca3af" }}><div style={{fontSize:36,marginBottom:8}}>🔍</div><div>검색 결과 없음</div></div>:(
+        <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(250px,1fr))",gap:9 }}>
+          {filtered.map(p=><ProductCard key={p.id} p={p} onClick={onSelect}/>)}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
+   SETS TAB
+   ============================================================ */
+const SETS = [
+  { id:"SET01",name:"미니트릿 5종 소형 SET",price_n:20900,price_f:17500,desc:"소형 사이즈 5가지 동결건조 트릿 구성.",products:["Treat01","Treat04","Treat07","Treat10","Treat13"],note:"닭 25g + 북어 17g + 산양유 20g + 가자미 17g + 소고기 22g" },
+  { id:"SET02",name:"미니트릿 5종 대형 SET",price_n:55000,price_f:49000,desc:"대형 사이즈 5가지 동결건조 트릿 구성.",products:["Treat02","Treat05","Treat08","Treat11","Treat14"],note:"닭 80g + 북어 50g + 산양유 65g + 가자미 55g + 소고기 80g" },
+  { id:"SET03",name:"오키로스틱 10종 SET (화이트·골드·블랙·핑크 택2)",price_n:31000,price_f:28000,desc:"일반(3,000원) 8팩 + 프리미엄 최대 2팩.",products:["5KM01","5KM02","5KM03","5KM04","5KM05","5KM06","5KM07","5KM08","5KM09","5KM10"],tier:true,
+    noteDetail:{ "일반 8팩":"레드·퍼플·옐로우닭·옐로우대구·그린닭·그린호키 중 자유 선택","프리미엄 최대 2팩":"화이트·골드·블랙·핑크 중 합계 2팩 이내","가능 예시":"골드 2팩 ✓ / 블랙 2팩 ✓ / 골드1+블랙1 ✓","불가 예시":"골드2+핑크1 = 프리미엄 3팩 → 불가 ✗" } },
+  { id:"SET04",name:"오키로스틱 10종 SET (화이트·골드·블랙·핑크 택4)",price_n:32000,price_f:29000,desc:"일반(3,000원) 6팩 + 프리미엄 최대 4팩.",products:["5KM01","5KM02","5KM03","5KM04","5KM05","5KM06","5KM07","5KM08","5KM09","5KM10"],tier:true,
+    noteDetail:{ "일반 6팩":"레드·퍼플·옐로우닭·옐로우대구·그린닭·그린호키 중 자유 선택","프리미엄 최대 4팩":"화이트·골드·블랙·핑크 중 합계 4팩 이내","가능 예시":"골드 4팩 ✓ / 블랙4 ✓ / 골드2+블랙1+핑크1 ✓","불가 예시":"골드3+블랙2 = 프리미엄 5팩 → 불가 ✗" } },
+  { id:"SET05",name:"오키로스틱 10종 SET (화이트·골드·블랙·핑크 전부)",price_n:40000,price_f:32000,desc:"화이트·골드·블랙·핑크 프리미엄 4종으로만 10팩 구성.",products:["5KM07","5KM08","5KM09","5KM10"],note:"화이트·골드·블랙·핑크 각 2~3팩씩 총 10팩" },
+  { id:"SET06",name:"필로캣 3박스 SET",price_n:115200,price_f:88200,desc:"필로 CAT 3종 BOX 각 1개씩.",products:["PILLO02","PILLO04","PILLO06"],note:"연어&호키&게살 + 닭&고등어 + 닭&산양유 BOX 각 1박스" },
+  { id:"SET07",name:"소피캣 3박스 SET",price_n:79200,price_f:70200,desc:"소피 CAT 라인에서 원하는 3박스를 자유 혼합.",products:["SOPHY02","SOPHY04","SOPHY06"],note:"Tasty·Natural 라인 혼합 가능, 원하는 3종 자유 선택" },
+  { id:"SET08",name:"이지케어 (릴리프+이너프) 3박스 SET",price_n:38700,price_f:29900,desc:"분리불안(릴리프)+면역(이너프) 3박스.",products:["Easycare01","Easycare02"],note:"릴리프×3 + 이너프×3" },
+  { id:"SET09",name:"이지케어 (오메가-3+헤어볼+멀티바이오틱스) 3박스 SET",price_n:32700,price_f:26700,desc:"오메가-3·헤어볼·장건강 기능성 이지케어 3박스.",products:["Easycare03","Easycare05","Easycare06"],note:"오메가-3×3 + 헤어볼×3 + 멀티바이오틱스×3" },
+  { id:"SET10",name:"4,500원 10팩 묶음할인",price_n:45000,price_f:39000,desc:"좋아해·리틀제주 4,500원 제품 중 자유 조합 10팩.",products:["Love01","Love03","Love04","Love05","Jeju01","Jeju04"],note:"산양유좋아해·참돔·갈치·소고기좋아해·리틀제주닭가슴살·리틀제주호키광어 중 10팩 자유 조합" },
+  { id:"SET11",name:"필로캣 BOX",price_n:38400,price_f:30000,desc:"필로 CAT 낱개 12캔 박스 (3종 중 1종 선택).",products:["PILLO01","PILLO03","PILLO05"],note:"연어&호키&게살 / 닭&고등어 / 닭&산양유 중 1종 선택" },
+  { id:"SET12",name:"소피캣 BOX",price_n:26400,price_f:24000,desc:"소피 CAT 낱개 12캔 박스 (원하는 종류 선택).",products:["SOPHY01","SOPHY03","SOPHY05","SOPHY07","SOPHY09","SOPHY11","SOPHY13"],note:"소피캣 라인 중 원하는 맛 12캔 구성" },
+  { id:"SET13",name:"필로독 BOX",price_n:34800,price_f:28800,desc:"필로 DOG 낱개(140g) 12캔 박스 (2종 중 1종 선택).",products:["PILLO07","PILLO09"],note:"닭&산양유 140g / 칠면조 140g 중 1종 선택 → 12캔" },
+  { id:"SET14",name:"메가트릿 3팩",price_n:36000,price_f:31000,desc:"메가트릿 닭안심 + 북어스틱 각 3팩.",products:["Treat18","Treat19"],note:"닭안심 90g×3팩 + 북어스틱 90g×3팩" },
+];
+
+function SetsTab({ onSelect }) {
+  const [open,setOpen]=useState(null);
+  return (
+    <div style={{ display:"flex",flexDirection:"column",gap:10 }}>
+      {SETS.map(s=>{
+        const isOpen=open===s.id;
+        const disc=fmtDisc(s.price_n,s.price_f);
+        const products=s.products.map(id=>pMap[id]).filter(Boolean);
+        return (
+          <div key={s.id} style={{ background:"#fff",border:"1px solid #e5e7eb",borderRadius:12,overflow:"hidden" }}>
+            <div onClick={()=>setOpen(isOpen?null:s.id)} style={{ padding:"15px 18px",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",background:isOpen?"#F0FDF4":"#fff" }}>
+              <div style={{ flex:1,marginRight:10 }}>
+                <div style={{ fontSize:14,fontWeight:700,color:"#111",marginBottom:2 }}>{s.name}</div>
+                <div style={{ fontSize:12,color:"#6b7280" }}>{s.desc}</div>
+              </div>
+              <div style={{ textAlign:"right",flexShrink:0 }}>
+                <div style={{ fontSize:15,fontWeight:700,color:"#DC2626" }}>{fmt(s.price_f)}</div>
+                {disc>0&&<div style={{ fontSize:11,color:"#9ca3af",textDecoration:"line-through" }}>{fmt(s.price_n)}</div>}
+                {disc>0&&<div style={{ fontSize:11,color:"#059669",fontWeight:700 }}>-{disc}% 할인</div>}
+                <div style={{ color:"#1A7A4E",fontSize:13,marginTop:2 }}>{isOpen?"▲":"▼"}</div>
+              </div>
+            </div>
+            {isOpen&&(
+              <div style={{ borderTop:"1px solid #f0fdf4",padding:"14px 18px",background:"#FAFFF9" }}>
+                {s.note&&<div style={{ background:"#DCFCE7",border:"1px solid #86EFAC",borderRadius:8,padding:"9px 12px",marginBottom:10,fontSize:12,color:"#14532D" }}>📋 {s.note}</div>}
+                {s.tier&&s.noteDetail&&(
+                  <div style={{ background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:8,padding:"10px 12px",marginBottom:10,fontSize:12,color:"#1E3A5F" }}>
+                    <div style={{ fontWeight:700,marginBottom:6 }}>🎯 구성 방법 안내</div>
+                    {Object.entries(s.noteDetail).map(([k,v])=><div key={k} style={{marginBottom:3}}><b style={{color:"#1D4ED8"}}>{k}:</b> {v}</div>)}
+                  </div>
+                )}
+                {s.tier?(
+                  <div>
+                    <div style={{ fontSize:12,fontWeight:700,color:"#374151",marginBottom:6 }}>일반(3,000원) — 자유선택</div>
+                    <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(190px,1fr))",gap:6,marginBottom:12 }}>
+                      {products.filter(p=>p.price_tier==="일반").map(p=>(
+                        <div key={p.id} onClick={()=>onSelect(p)} style={{ background:"#fff",border:"1px solid #e5e7eb",borderRadius:8,padding:"8px 10px",cursor:"pointer" }}
+                          onMouseEnter={e=>e.currentTarget.style.borderColor="#1A7A4E"} onMouseLeave={e=>e.currentTarget.style.borderColor="#e5e7eb"}>
+                          <div style={{ fontSize:10,color:"#6B7280" }}>일반 · {fmt(p.price_f)}</div>
+                          <div style={{ fontSize:12,fontWeight:600,color:"#111" }}>{p.name}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ fontSize:12,fontWeight:700,color:"#374151",marginBottom:6 }}>프리미엄(3,500원) — 수량 제한</div>
+                    <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(190px,1fr))",gap:6 }}>
+                      {products.filter(p=>p.price_tier==="프리미엄").map(p=>(
+                        <div key={p.id} onClick={()=>onSelect(p)} style={{ background:"#FFF8ED",border:"1px solid #FCD34D",borderRadius:8,padding:"8px 10px",cursor:"pointer" }}
+                          onMouseEnter={e=>e.currentTarget.style.borderColor="#D97706"} onMouseLeave={e=>e.currentTarget.style.borderColor="#FCD34D"}>
+                          <div style={{ fontSize:10,color:"#92400E" }}>프리미엄 · {fmt(p.price_f)}</div>
+                          <div style={{ fontSize:12,fontWeight:600,color:"#111" }}>{p.name}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ):(
+                  <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:6 }}>
+                    {products.map(p=>(
+                      <div key={p.id} onClick={()=>onSelect(p)} style={{ background:"#fff",border:"1px solid #e5e7eb",borderRadius:8,padding:"8px 10px",cursor:"pointer" }}
+                        onMouseEnter={e=>e.currentTarget.style.borderColor="#1A7A4E"} onMouseLeave={e=>e.currentTarget.style.borderColor="#e5e7eb"}>
+                        <div style={{ fontSize:10,color:LINE_COLORS[p.line]||"#555",fontWeight:700 }}>{p.line}</div>
+                        <div style={{ fontSize:12,fontWeight:600,color:"#111",lineHeight:1.3 }}>{p.name}</div>
+                        <div style={{ fontSize:11,color:"#6b7280" }}>{p.size} · {fmt(p.price_f)}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ============================================================
+   DISEASE TAB — 간식 / 영양제 분리 + 낮은 성분순 정렬
+   ============================================================ */
+function DiseaseTab({ onSelect }) {
+  const [sel,setSel]=useState(null);
+
+  function getRecs(d) {
+    // Hard exclude: avoid keyword in ingredients
+    const avoidKwCheck = p => {
+      const txt = ((p.sub||"")+(p.func||"")+(p.main||"")).toLowerCase();
+      return !d.avoid_kw.some(kw=>txt.includes(kw.toLowerCase()));
+    };
+    // Score: lower avoid nutrient = better; more help keywords = better
+    const getScore = p => {
+      const txt = ((p.sub||"")+(p.func||"")+(p.main||"")).toLowerCase();
+      let avoidPenalty = 0;
+      d.avoid_fields.forEach(({field})=>{
+        const val = p[field]||0;
+        if(val>0) avoidPenalty += val;
+      });
+      let helpBonus = d.help_kw.filter(kw=>txt.includes(kw.toLowerCase())).length;
+      return { avoidPenalty, helpBonus };
+    };
+
+    // Only non-bundle products for recommendations
+    const base = PRODUCTS.filter(p=>!p.isBundle&&avoidKwCheck(p));
+    const snacks = base.filter(p=>["주식캔","간식캔","습식간식","동결건조","양갱","츄잉"].includes(p.type));
+    const supps = base.filter(p=>p.type==="영양제");
+
+    const rank = arr => arr
+      .map(p=>({ p, ...getScore(p) }))
+      .sort((a,b)=>{ if(a.avoidPenalty!==b.avoidPenalty)return a.avoidPenalty-b.avoidPenalty; return b.helpBonus-a.helpBonus; })
+      .slice(0,8);
+
+    return { snacks:rank(snacks), supps:rank(supps) };
+  }
+
+  function AvoidTag({p,d}) {
+    const tags=d.avoid_fields.filter(({field})=>p[field]>0).map(({field,label})=>`${label} ${p[field]}%`);
+    if(!tags.length)return null;
+    return <span style={{fontSize:10,color:"#DC2626",background:"#FEF2F2",padding:"2px 6px",borderRadius:4}}>⬇️ {tags.join(" · ")}</span>;
+  }
+  function HelpTag({p,d}) {
+    const txt=((p.sub||"")+(p.func||"")).toLowerCase();
+    const found=d.help_kw.filter(kw=>txt.includes(kw.toLowerCase()));
+    if(!found.length)return null;
+    return <span style={{fontSize:10,color:"#059669",background:"#ECFDF5",padding:"2px 6px",borderRadius:4}}>✅ {found.join("·")} 함유</span>;
+  }
+
+  function RecList({items,d,onSelect,label}) {
+    if(!items.length)return<div style={{fontSize:12,color:"#9ca3af",padding:"10px 0"}}>해당 카테고리 추천 제품 없음</div>;
+    return(
+      <div>
+        <div style={{ fontSize:12,fontWeight:700,color:"#374151",marginBottom:8,paddingBottom:4,borderBottom:"1px solid #e5e7eb" }}>{label}</div>
+        <div style={{ display:"flex",flexDirection:"column",gap:7 }}>
+          {items.map(({p})=>(
+            <div key={p.id} onClick={()=>onSelect(p)} style={{ background:"#fff",border:"1px solid #e5e7eb",borderRadius:9,padding:"10px 13px",cursor:"pointer",display:"flex",gap:10,alignItems:"flex-start" }}
+              onMouseEnter={e=>e.currentTarget.style.borderColor="#1A7A4E"} onMouseLeave={e=>e.currentTarget.style.borderColor="#e5e7eb"}>
+              <div style={{ flex:1 }}>
+                <div style={{ display:"flex",gap:4,flexWrap:"wrap",marginBottom:3 }}>
+                  <Badge label={p.line} color={LINE_COLORS[p.line]||"#555"}/>
+                  <Badge label={p.form||p.type} color={TYPE_BADGE[p.type]||"#555"}/>
+                </div>
+                <div style={{ fontSize:13,fontWeight:600,color:"#111",marginBottom:3 }}>{p.name}</div>
+                <div style={{ fontSize:11,color:"#6b7280",marginBottom:4 }}>{p.size} · {fmt(p.price_f)}</div>
+                <div style={{ display:"flex",gap:4,flexWrap:"wrap" }}>
+                  <AvoidTag p={p} d={d}/>
+                  <HelpTag p={p} d={d}/>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if(sel) {
+    const d=DISEASES.find(x=>x.name===sel);
+    const {snacks,supps}=getRecs(d);
+    return(
+      <div>
+        <button onClick={()=>setSel(null)} style={{ background:"none",border:"1px solid #e5e7eb",borderRadius:8,padding:"7px 14px",cursor:"pointer",fontSize:12,marginBottom:14,color:"#374151" }}>← 질병 목록</button>
+        <div style={{ background:"#FFFBEB",border:"1px solid #FCD34D",borderRadius:12,padding:"14px 18px",marginBottom:10 }}>
+          <div style={{ fontSize:18,marginBottom:4 }}>{d.icon} <strong>{d.name}</strong></div>
+          <div style={{ fontSize:13,color:"#374151",marginBottom:8 }}>{d.desc}</div>
+          <div style={{ display:"flex",gap:12,flexWrap:"wrap",fontSize:12 }}>
+            {d.avoid_fields.length>0&&<div>⬇️ <b style={{color:"#DC2626"}}>낮을수록 좋음:</b> {d.avoid_fields.map(f=>f.label).join(", ")}</div>}
+            {d.avoid_kw.length>0&&<div>🚫 <b style={{color:"#DC2626"}}>피해야 할 성분:</b> {d.avoid_kw.join(", ")}</div>}
+            {d.help_kw.length>0&&<div>✅ <b style={{color:"#059669"}}>도움되는 성분:</b> {d.help_kw.join(", ")}</div>}
+          </div>
+        </div>
+        <div style={{ background:"#FEF2F2",border:"1px solid #FCA5A5",borderRadius:8,padding:"9px 13px",marginBottom:14,fontSize:12,color:"#991B1B" }}>
+          ⚕️ 처방약·치료식을 복용 중이라면 반드시 담당 수의사에게 상담 후 급여하세요.
+        </div>
+        <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:16 }}>
+          <RecList items={snacks} d={d} onSelect={onSelect} label="🍖 간식·주식 라인 추천"/>
+          <RecList items={supps} d={d} onSelect={onSelect} label="💊 영양제 라인 추천"/>
+        </div>
+      </div>
+    );
+  }
+
+  return(
+    <div>
+      <div style={{ fontSize:13,color:"#6b7280",marginBottom:12,padding:"10px 14px",background:"#f9fafb",borderRadius:8 }}>
+        💡 질병을 선택하면 <b>간식 라인</b>과 <b>영양제 라인</b>으로 나누어, 피해야 할 성분이 낮은 순서로 추천합니다.
+      </div>
+      <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:10 }}>
+        {DISEASES.map(d=>(
+          <div key={d.name} onClick={()=>setSel(d.name)} style={{ background:"#fff",border:"1px solid #e5e7eb",borderRadius:12,padding:"15px 13px",cursor:"pointer",textAlign:"center",transition:"all 0.15s" }}
+            onMouseEnter={e=>{e.currentTarget.style.borderColor="#1A7A4E";e.currentTarget.style.background="#F0FDF4";}}
+            onMouseLeave={e=>{e.currentTarget.style.borderColor="#e5e7eb";e.currentTarget.style.background="#fff";}}>
+            <div style={{ fontSize:30,marginBottom:6 }}>{d.icon}</div>
+            <div style={{ fontSize:14,fontWeight:700,color:"#111",marginBottom:4 }}>{d.name}</div>
+            {d.avoid_fields.length>0&&<div style={{ fontSize:10,color:"#DC2626",marginBottom:2 }}>⬇️ {d.avoid_fields.map(f=>f.label).join("·")}</div>}
+            {d.help_kw.length>0&&<div style={{ fontSize:10,color:"#059669" }}>✅ {d.help_kw.slice(0,2).join("·")}</div>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   INGREDIENT TAB — 성분별 추천
+   ============================================================ */
+function IngredientTab({ onSelect }) {
+  const [selNut,setSelNut]=useState(NUTRIENTS[0].key);
+  const nut=NUTRIENTS.find(n=>n.key===selNut);
+
+  const grouped = useMemo(()=>{
+    const base=PRODUCTS.filter(p=>!p.isBundle);
+    return TYPE_GROUPS.map(g=>{
+      let list=base.filter(p=>g.types.includes(p.type));
+      if(nut.ratio) {
+        list=list.filter(p=>p.calcium>0&&p.phosphorus>0).map(p=>({p,val:p.calcium/p.phosphorus})).sort((a,b)=>Math.abs(a.val-1.2)-Math.abs(b.val-1.2)).slice(0,6).map(({p,val})=>({p,val}));
+      } else {
+        list=list.filter(p=>p[nut.key]>0).sort((a,b)=>a[nut.key]-b[nut.key]).slice(0,6).map(p=>({p,val:p[nut.key]}));
+      }
+      return {label:g.label,items:list};
+    }).filter(g=>g.items.length>0);
+  },[selNut]);
+
+  return(
+    <div>
+      <div style={{ display:"flex",gap:6,flexWrap:"wrap",marginBottom:14 }}>
+        {NUTRIENTS.map(n=>(
+          <button key={n.key} onClick={()=>setSelNut(n.key)} style={{ padding:"7px 14px",borderRadius:20,border:`2px solid ${selNut===n.key?"#1A7A4E":"#e5e7eb"}`,cursor:"pointer",fontSize:12,fontWeight:selNut===n.key?700:400,background:selNut===n.key?"#1A7A4E":"#fff",color:selNut===n.key?"#fff":"#374151",transition:"all 0.15s" }}>{n.label}</button>
+        ))}
+      </div>
+      <div style={{ background:"#F0FDF4",border:"1px solid #86EFAC",borderRadius:8,padding:"9px 13px",marginBottom:14,fontSize:13,color:"#14532D" }}>
+        📊 {nut.desc} {nut.ratio?"(1.2:1 기준 가까운 순)":"(낮은 순)"} — 타입별 상위 6개
+      </div>
+      {grouped.map(g=>(
+        <div key={g.label} style={{ marginBottom:18 }}>
+          <div style={{ fontSize:13,fontWeight:700,color:"#374151",marginBottom:8,paddingBottom:4,borderBottom:"2px solid #e5e7eb" }}>{g.label}</div>
+          <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(230px,1fr))",gap:7 }}>
+            {g.items.map(({p,val},idx)=>{
+              const lc=LINE_COLORS[p.line]||"#555";
+              const displayVal = nut.ratio?`Ca/P=${val.toFixed(2)}:1`:`${val}${nut.unit}`;
+              return(
+                <div key={p.id} onClick={()=>onSelect(p)} style={{ background:"#fff",border:"1px solid #e5e7eb",borderRadius:9,padding:"10px 12px",cursor:"pointer",display:"flex",gap:9,alignItems:"center" }}
+                  onMouseEnter={e=>e.currentTarget.style.borderColor="#1A7A4E"} onMouseLeave={e=>e.currentTarget.style.borderColor="#e5e7eb"}>
+                  <div style={{ background:idx===0?"#FEF9C3":idx===1?"#F3F4F6":"#fff",color:idx===0?"#92400E":"#6b7280",fontWeight:700,fontSize:13,width:24,height:24,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,border:"1px solid #e5e7eb" }}>{idx+1}</div>
+                  <div style={{ flex:1 }}>
+                    <div style={{ display:"flex",gap:4,marginBottom:3 }}>
+                      <Badge label={p.line} color={lc}/>
+                      <Badge label={p.form||p.type} color={TYPE_BADGE[p.type]||"#555"}/>
+                    </div>
+                    <div style={{ fontSize:12,fontWeight:600,color:"#111",lineHeight:1.3,marginBottom:2 }}>{p.name}</div>
+                    <div style={{ display:"flex",gap:6,fontSize:11 }}>
+                      <span style={{ color:"#1D4ED8",fontWeight:700 }}>{displayVal}</span>
+                      <span style={{ color:"#6b7280" }}>{fmt(p.price_f)}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ============================================================
+   FAQ TAB (완전 오프라인)
+   ============================================================ */
+const FAQ_DATA=[
+  {group:"💰 가격·세트",items:[
+    {q:"이 제품의 가격이 얼마인가요?",a:`박람회 특별가(박람회가) 기준 안내드립니다. [제품 검색] 탭에서 직접 확인하세요!
+
+📌 라인별 박람회가 요약
+• 필로 CAT 낱개: 2,700원 / BOX: 30,000원
+• 소피 CAT 낱개: 2,100원 / BOX: 24,000원
+• 동네고양이 낱개: 1,300원 / BOX: 14,400원
+• 한방보양 4P: 4,500~9,000원 / 30P: 29,000~45,000원
+• 좋아해 4P: 2,900~4,500원 / 10팩: 29,000~39,000원
+• 리틀제주 4P: 4,500~5,500원 / 10팩: 39,000~53,000원
+• 오키로스틱 일반 4P: 3,000원 / 10팩: 28,000원
+• 오키로스틱 프리미엄 4P: 3,500원 / 10팩: 32,000원
+• 이지케어 1곽: 9,900~22,000원 / 3곽: 26,700~62,700원
+• 미니트릿 소형: 3,000~5,500원 / 대형: 6,900~16,000원
+• rTG 오메가-3: 9,900~26,500원
+• 보타닉 항산화제: 32,300원 / 파이퍼 눈: 27,000원
+• 커큐젠 관절: 19,500원 / 프로바이오틱스: 22,800원
+• 터키츄 링: 3,300원 / 스틱: 7,300원
+• 덴탈껌 140g: 9,900원 / 3팩: 28,500원 / 5팩: 46,000원`},
+    {q:"세트 구성이 가능한가요?",a:`네, 다양한 세트 구성이 가능합니다! [세트 구성] 탭에서 전체 세트를 확인하실 수 있습니다.
+
+📦 주요 세트
+• 미니트릿 5종 소형 SET: 17,500원
+• 미니트릿 5종 대형 SET: 49,000원
+• 오키로스틱 10종 SET: 28,000~32,000원
+• 필로캣 3박스 SET: 88,200원
+• 소피캣 3박스 SET: 70,200원 (자유 혼합)
+• 이지케어 3박스 SET: 26,700~29,900원
+• 4,500원 10팩 묶음: 39,000원`},
+    {q:"제품 가격이 왜 높은가요?",a:`조공 제품은 고품질 원료를 사용하기 때문입니다.
+
+🌟 프리미엄 원료 사용 이유
+• 국내산 무항생제 닭, 제주산 유기농 채소
+• 알래스카 연어, 뉴질랜드 산양유, 호주 자연방목 소고기
+• 방부제 무첨가 (개봉 후 냉장 보관 필요)
+• 캡슐형 영양제: 캐나다 VIVA 제조, 스페인 솔루텍스 원료
+• 한방보양 라인: 6년근 홍삼, 러시아산 분골녹용
+
+박람회 특별가 + 세트 구성 시 추가 할인 혜택이 있습니다!`},
+    {q:"박람회가 vs 조공 세일, 언제가 더 저렴한가요?",a:`• 낱개·소량 구매: 박람회 특별가가 유리합니다.
+• 대량·묶음 구매: 조공 정기 세일과 비교해보세요.
+• 박람회 전용 세트: 박람회에서만 구매 가능한 특별 구성이 있습니다.`},
+    {q:"다음 조공 세일은 언제인가요?",a:`카카오톡 채널 "조공" 추가하시면 세일·신제품·이벤트 정보를 가장 먼저 받아보실 수 있습니다.`},
+  ]},
+  {group:"🧪 성분 문의",items:[
+    {q:"원료가 어떻게 들어가나요?",a:`제품마다 원료가 다릅니다. [제품 검색] 탭에서 제품을 클릭하면 메인원료·부원료·기능성원료를 확인하실 수 있습니다.`},
+    {q:"알러지 발생은 없을까요?",a:`제품별 알레르기 주의 성분이 표시되어 있습니다.
+
+⚠️ 주요 알레르기 원료
+• 생선: 연어·참치·고등어·가자미·호키·양미리 등
+• 육류: 닭·소고기·오리·말고기·칠면조·꽃사슴 등
+• 기타: 산양유(유제품)·게살·멸치 등
+
+💡 알레르기 반려동물에게는 단일 단백질 제품을 권장합니다.`},
+    {q:"나트륨/인/칼슘/지방/단백질 함량은 어떻게 되나요?",a:`[제품 검색] 탭에서 제품 클릭 시 영양성분표를 확인하실 수 있습니다.
+특정 성분이 중요하신 경우 [성분별 추천] 탭에서 낮은 순으로 정렬된 제품을 확인하세요!`},
+    {q:"타피오카전분이 들어가나요?",a:`습식 제품(캔·츄르 형태) 대부분에 포함됩니다.
+미포함: 동결건조 트릿, 캡슐형·가루형 영양제`},
+    {q:"한천이 들어가나요?",a:`필로 CAT 전 제품, 소피 CAT Tasty, 동네고양이 캔, 산양유 양갱 시리즈에 포함됩니다.`},
+  ]},
+  {group:"⭐ 기능·차이 문의",items:[
+    {q:"퓨어 오메가-3 vs 레드 오메가-3 차이는?",a:`🔵 퓨어: EPA 73.33mg+DHA 36.67mg — 순수 오메가-3만 함유 (14,400원)
+🔴 레드: EPA 66mg+DHA 44mg+아스타잔틴 5mg — 오메가-3+항산화 복합
+• mini 블리스터 30캡슐: 9,900원 (입문용)
+• mini 통 120캡슐: 26,500원
+• 6oval 미디움 30캡슐: 26,500원 (고용량, 대형견·중증케어)
+
+아스타잔틴 = 강력한 항산화. 노령묘·견이나 면역이 필요하면 레드를 추천합니다.`},
+    {q:"프로바이오틱스 vs 헤어볼과 식이섬유 차이는?",a:`🦠 프로바이오틱스: 유익균을 직접 공급 → 설사·연변 개선에 효과적
+🌿 헤어볼과 식이섬유: 식이섬유로 장을 청소 → 변비·헤어볼 개선에 효과적
+
+설사 → 프로바이오틱스 / 변비·헤어볼 → 헤어볼과 식이섬유`},
+    {q:"이지케어 vs 집중케어 차이는?",a:`🟢 이지케어: 츄르 형태, 급여 편의성 최우선 (캡슐 싫어하는 아이에게 적합)
+🔴 집중케어: 캡슐·가루 형태, 성분 농도가 더 높음
+
+급여가 까다로운 경우 → 이지케어 / 고농도 원함 → 집중케어`},
+  ]},
+  {group:"🏥 질병별 추천",items:[
+    {q:"심장이 좋지 않은데 제품을 추천해주세요",a:`⚠️ 처방약 복용 중이라면 수의사 상담 후 급여하세요.
+
+[질병별 추천] 탭 → 심장병 선택 시 나트륨이 낮은 제품 + 타우린·코엔자임Q10 함유 제품을 자동 추천합니다.
+
+✅ 대표 추천
+• 이지케어 이너프 (코엔자임Q10+타우린+오메가-3)
+• 동결건조 북어·닭안심 (나트륨 0.05%, 저지방)
+• 이지케어 오메가-3 (심장 혈류 개선)`},
+    {q:"신장이 좋지 않은데 제품을 추천해주세요",a:`⚠️ 처방약 복용 중이라면 수의사 상담 후 급여하세요.
+
+[질병별 추천] 탭 → 신장병 선택 시 인·단백질·나트륨이 낮은 제품을 자동 추천합니다.
+
+✅ 대표 추천
+• 이지케어 신장 (신장 전용, 인 0.032%, 나트륨 0.14%)
+• 이지케어 오메가-3 (신장 혈류·염증 완화)
+• 소피 CAT Natural 참치 (인 0.05%, 나트륨 0.87%, 저지방)`},
+    {q:"관절이 좋지 않은데 제품을 추천해주세요",a:`⚠️ 처방약 복용 중이라면 수의사 상담 후 급여하세요.
+
+✅ 대표 추천
+• 커큐젠 관절 보조제 (블랙커민+보스웰리아+초록입홍합+UC-II콜라겐)
+• 오키로스틱 그린 닭가슴살/호키 (초록입홍합+글루코사민)
+• 산양유 양갱 관절 (글루코사민+상어연골)
+• 한방보양 갈비탕전 (분골녹용+당귀+백출)`},
+    {q:"췌장이 좋지 않은데 제품을 추천해주세요",a:`⚠️ 처방약 복용 중이라면 수의사 상담 후 급여하세요.
+
+[질병별 추천] 탭 → 췌장염 선택 시 지방 함량이 낮은 제품을 자동 추천합니다.
+
+✅ 대표 추천 (지방 낮은 순)
+• 오키로스틱 그린 호키 (지방 0.01%)
+• 오키로스틱 옐로우 대구 (지방 0.03%)
+• 소피 CAT Natural 참치 (지방 0.2%)`},
+    {q:"갑상선이 좋지 않아요",a:`⚠️ 갑상선 질환 시 켈프(다시마·해조류) 성분을 피해야 합니다.
+
+주의: 이지케어 릴리프 → 켈프 포함, 갑상선 시 피하기
+[질병별 추천] 탭 → 갑상선 선택 시 켈프 포함 제품을 자동 제외합니다.`},
+    {q:"분리불안에 도움이 되는 제품을 추천해주세요",a:`✅ 대표 추천
+• 이지케어 릴리프 (L-트립토판+발레리안+L-테아닌+켈프)
+• 이지케어 나이트 강아지용 (L-테아닌+L-트립토판+GABA+밀크씨슬)`},
+  ]},
+  {group:"📦 보관·급여",items:[
+    {q:"습식 제품(캔·스틱) 보관 방법",a:`미개봉: 서늘한 상온 (직사광선 피해)
+개봉 후: 즉시 냉장 보관, 다음날까지 급여 (방부제 무첨가)
+⚠️ 개봉 후 상온에 오래 두지 마세요 (부패 위험)`},
+    {q:"프로바이오틱스는 어떻게 급여하나요?",a:`• 하루 1포, 사료·간식에 토핑하거나 물에 섞어서 급여
+• ⚠️ 전자레인지 사용 금지 (유산균 사멸)
+• 변이 딱딱해지면 반포로 줄여주세요`},
+    {q:"헤어볼과 식이섬유는 어떻게 급여하나요?",a:`• ⚠️ 단독 급여 금지 (목에 걸릴 수 있음)
+• 물·습식캔·습식간식에 섞어서 급여
+• 하루 1포, 충분한 수분과 함께`},
+    {q:"동결건조 트릿 보관 방법",a:`미개봉: 서늘한 상온 보관 (습기 피해)
+개봉 후 단기(3개월 이내): 밀봉 상온
+개봉 후 장기: 냉장 또는 냉동 보관 권장`},
+    {q:"유통기한은 어떻게 확인하나요?",a:`제품 포장에 표시된 유통기한을 확인해주세요. 궁금하신 경우 부스 직원에게 문의하세요!`},
+  ]},
+  {group:"🚗 행사·기타",items:[
+    {q:"박람회에서 택배 발송 가능한가요?",a:`부스에서 직접 택배 발송은 되지 않습니다.
+박람회장 내 택배 접수처를 이용해 주세요.`},
+    {q:"구매한 상품을 잠시 보관 후 나중에 찾을 수 있나요?",a:`네, 가능합니다! 결제 시 직원에게 "보관 요청" 말씀해 주시면 됩니다. 영수증을 지참해서 나중에 찾아가세요.`},
+    {q:"주차비 정산은 어떻게 하나요?",a:`• 코엑스: 전시장 입구 쪽 QR코드 이용
+• 세텍(SETEC): 주차비 할인 없음
+• AT센터: 출구 쪽 2시간 주차비 쿠폰
+• 벡스코(BEXCO): 주차비 할인 없음
+
+현재 행사 장소를 확인 후 이용해 주세요.`},
+  ]},
+];
+
+function FAQTab() {
+  const [selQ, setSelQ] = useState(null); // null=목록, {q,a,group}=답변화면
+  const [search, setSearch] = useState("");
+
+  const filteredGroups = useMemo(() => {
+    if (!search.trim()) return FAQ_DATA;
+    const kw = search.trim().toLowerCase();
+    return FAQ_DATA
+      .map(g => ({ ...g, items: g.items.filter(it => it.q.toLowerCase().includes(kw) || it.a.toLowerCase().includes(kw)) }))
+      .filter(g => g.items.length > 0);
+  }, [search]);
+
+  /* ── 답변 전체화면 ── */
+  if (selQ) {
+    return (
+      <div style={{ position:"fixed", inset:0, background:"#f9fafb", zIndex:9999,
+        display:"flex", flexDirection:"column" }}>
+
+        {/* 상단 고정 헤더 */}
+        <div style={{ background:"#1A7A4E", padding:"14px 16px",
+          display:"flex", alignItems:"center", gap:10,
+          flexShrink:0, boxShadow:"0 2px 8px rgba(0,0,0,0.15)" }}>
+          <button onClick={() => setSelQ(null)}
+            style={{ background:"rgba(255,255,255,0.25)", border:"none", borderRadius:8,
+              padding:"9px 16px", color:"#fff", fontSize:15, cursor:"pointer",
+              fontWeight:700, display:"flex", alignItems:"center", gap:4 }}>
+            ‹ 목록
+          </button>
+          <div style={{ flex:1 }}>
+            <div style={{ color:"rgba(255,255,255,0.7)", fontSize:11, marginBottom:1 }}>자주 묻는 질문</div>
+            <div style={{ color:"#fff", fontSize:12, fontWeight:600,
+              overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
+              {selQ.group}
+            </div>
+          </div>
+        </div>
+
+        {/* 스크롤 가능한 본문 */}
+        <div style={{ flex:1, overflowY:"auto", WebkitOverflowScrolling:"touch" }}>
+          <div style={{ padding:"20px 16px", maxWidth:640, margin:"0 auto" }}>
+
+            {/* 질문 */}
+            <div style={{ background:"#F0FDF4", border:"1px solid #6EE7B7",
+              borderRadius:14, padding:"18px 20px", marginBottom:16 }}>
+              <div style={{ fontSize:11, fontWeight:700, color:"#059669",
+                marginBottom:8, letterSpacing:0.5 }}>Q</div>
+              <div style={{ fontSize:17, fontWeight:700, color:"#14532D",
+                lineHeight:1.6 }}>{selQ.q}</div>
+            </div>
+
+            {/* 답변 */}
+            <div style={{ background:"#fff", border:"1px solid #e5e7eb",
+              borderRadius:14, padding:"20px" }}>
+              <div style={{ fontSize:11, fontWeight:700, color:"#6b7280",
+                marginBottom:12, letterSpacing:0.5 }}>A</div>
+              <div style={{ fontSize:15, color:"#374151",
+                lineHeight:2.1, whiteSpace:"pre-wrap" }}>{selQ.a}</div>
+            </div>
+
+            {/* 하단 여백 (버튼 높이만큼) */}
+            <div style={{ height:80 }} />
+          </div>
+        </div>
+
+        {/* 하단 고정 뒤로가기 버튼 */}
+        <div style={{ flexShrink:0, padding:"12px 16px",
+          background:"#fff", borderTop:"1px solid #e5e7eb",
+          paddingBottom:"max(12px, env(safe-area-inset-bottom))" }}>
+          <button onClick={() => setSelQ(null)}
+            style={{ width:"100%", padding:"15px", background:"#1A7A4E",
+              color:"#fff", border:"none", borderRadius:14,
+              fontSize:15, fontWeight:700, cursor:"pointer",
+              display:"flex", alignItems:"center", justifyContent:"center", gap:6 }}>
+            ‹ 질문 목록으로 돌아가기
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── 질문 목록 ── */
+  return (
+    <div>
+      {/* 검색 */}
+      <input
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        placeholder="🔍  질문 검색..."
+        style={{ width:"100%", padding:"13px 16px", fontSize:14,
+          border:"1.5px solid #e5e7eb", borderRadius:12, outline:"none",
+          boxSizing:"border-box", marginBottom:18, background:"#fff" }}
+        onFocus={e => e.target.style.border="1.5px solid #1A7A4E"}
+        onBlur={e => e.target.style.border="1.5px solid #e5e7eb"}
+      />
+
+      {/* 그룹별 질문 목록 */}
+      {filteredGroups.map((g, gi) => (
+        <div key={g.group} style={{ marginBottom:24 }}>
+          {/* 그룹 레이블 */}
+          <div style={{ fontSize:13, fontWeight:700, color:"#fff",
+            background:"#1A7A4E", borderRadius:8, padding:"6px 12px",
+            marginBottom:10, display:"inline-block" }}>
+            {g.group}
+          </div>
+
+          {/* 질문 항목들 */}
+          {g.items.map(it => (
+            <div
+              key={it.q}
+              onClick={() => setSelQ({ q: it.q, a: it.a, group: g.group })}
+              style={{ fontSize:14, padding:"15px 16px", borderRadius:12,
+                cursor:"pointer", marginBottom:8, lineHeight:1.5,
+                background:"#fff", border:"1px solid #e5e7eb",
+                color:"#374151", display:"flex",
+                justifyContent:"space-between", alignItems:"center", gap:8,
+                transition:"background 0.1s" }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background="#F0FDF4";
+                e.currentTarget.style.borderColor="#6EE7B7";
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background="#fff";
+                e.currentTarget.style.borderColor="#e5e7eb";
+              }}
+              onTouchStart={e => {
+                e.currentTarget.style.background="#F0FDF4";
+                e.currentTarget.style.borderColor="#6EE7B7";
+              }}
+              onTouchEnd={e => {
+                e.currentTarget.style.background="#fff";
+                e.currentTarget.style.borderColor="#e5e7eb";
+              }}
+            >
+              <span style={{ flex:1 }}>{it.q}</span>
+              <span style={{ color:"#1A7A4E", fontSize:22,
+                flexShrink:0, fontWeight:300, lineHeight:1 }}>›</span>
+            </div>
+          ))}
+        </div>
+      ))}
+
+      {filteredGroups.length === 0 && (
+        <div style={{ textAlign:"center", color:"#9ca3af", padding:"60px 0" }}>
+          <div style={{ fontSize:40, marginBottom:12 }}>🔍</div>
+          <div style={{ fontSize:15, fontWeight:600, marginBottom:4 }}>검색 결과가 없습니다</div>
+          <div style={{ fontSize:13 }}>다른 키워드로 검색해보세요</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+/* ============================================================
+   MAIN APP
+   ============================================================ */
+function App() {
+  const [tab,setTab]=useState("search");
+  const [selProd,setSelProd]=useState(null);
+  const TABS=[
+    {id:"search",label:"🔍 제품 검색"},
+    {id:"sets",label:"🎁 세트 구성"},
+    {id:"disease",label:"🏥 질병별 추천"},
+    {id:"ingredient",label:"📊 성분별 추천"},
+    {id:"faq",label:"💬 자주 묻는 질문"},
+  ];
+  return(
+    <div style={{ minHeight:"100vh",background:"#F4F6F0",fontFamily:"'Noto Sans KR',-apple-system,sans-serif" }}>
+      {/* 헤더 — 흰색 배너 + 조공 로고 */}
+      <div style={{ background:"#fff",padding:"12px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",borderBottom:"1px solid #e5e7eb",boxShadow:"0 2px 8px rgba(0,0,0,0.06)" }}>
+        {/* 왼쪽: 로고 + 타이틀 */}
+        <div style={{ display:"flex",alignItems:"center",gap:10 }}>
+          <img src="data:image/png;base64,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"
+            style={{ width:38,height:30,objectFit:"cover",objectPosition:"top",mixBlendMode:"normal",flexShrink:0 }}
+            alt="조공 로고" />
+          <div>
+            <div style={{ fontSize:18,fontWeight:800,color:"#111",letterSpacing:-0.3,lineHeight:1.2 }}>박람회 가이드</div>
+            <div style={{ fontSize:10,color:"#6b7280",letterSpacing:0.5,marginTop:1 }}>오늘 하루도 친절하고 힘차게 ~!! 파이팅~!!</div>
+          </div>
+        </div>
+        {/* 오른쪽: 정보 */}
+        <div style={{ fontSize:10,color:"#374151",textAlign:"right",lineHeight:1.8 }}>
+          <div style={{ fontWeight:600 }}>💰 박람회 특별가</div>
+          <div>📦 {PRODUCTS.length}개 제품</div>
+        </div>
+      </div>
+      {/* 탭 */}
+      <div style={{ background:"#fff",borderBottom:"1px solid #e5e7eb",display:"flex",overflowX:"auto" }}>
+        {TABS.map(t=>(
+          <button key={t.id} onClick={()=>setTab(t.id)} style={{ padding:"12px 16px",border:"none",borderBottom:tab===t.id?"3px solid #1A7A4E":"3px solid transparent",background:"none",cursor:"pointer",fontSize:13,fontWeight:tab===t.id?700:400,color:tab===t.id?"#1A7A4E":"#6b7280",whiteSpace:"nowrap" }}>
+            {t.label}
+          </button>
+        ))}
+      </div>
+      <div style={{ maxWidth:1100,margin:"0 auto",padding:"16px 12px" }}>
+        {tab==="search"&&<SearchTab onSelect={setSelProd}/>}
+        {tab==="sets"&&<SetsTab onSelect={setSelProd}/>}
+        {tab==="disease"&&<DiseaseTab onSelect={setSelProd}/>}
+        {tab==="ingredient"&&<IngredientTab onSelect={setSelProd}/>}
+        {tab==="faq"&&<FAQTab/>}
+      </div>
+      {selProd&&<ProductDetail p={selProd} onClose={()=>setSelProd(null)}/>}
+    </div>
+  );
+}
+
+
+const domNode = document.getElementById("root");
+const root = ReactDOM.createRoot(domNode);
+root.render(React.createElement(App));
+  </script>
+</body>
+</html>
