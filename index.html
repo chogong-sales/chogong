@@ -434,8 +434,7 @@ function SearchTab({ onSelect }) {
    SETS TAB
    ============================================================ */
 const SETS = [
-  { id:"SET01",name:"미니트릿 5종 소형 SET",price_n:20900,price_f:17500,desc:"소형 사이즈 5가지 동결건조 트릿 구성.",products:["Treat01","Treat04","Treat07","Treat10","Treat13"],note:"닭 25g + 북어 17g + 산양유 20g + 가자미 17g + 소고기 22g" },
-  { id:"SET02",name:"미니트릿 5종 대형 SET",price_n:55000,price_f:49000,desc:"대형 사이즈 5가지 동결건조 트릿 구성.",products:["Treat02","Treat05","Treat08","Treat11","Treat14"],note:"닭 80g + 북어 50g + 산양유 65g + 가자미 55g + 소고기 80g" },
+  { id:"SET01",name:"미니트릿 5종 소형 SET",price_n:21200,price_f:18500,desc:"소형 사이즈 5가지 동결건조 트릿 구성.",products:["Treat01","Treat04","Treat07","Treat10","Treat13"],note:"닭 25g + 북어 17g + 산양유 20g + 가자미 17g + 소고기 22g" },
   { id:"SET03",name:"오키로스틱 10종 SET (화이트·골드·블랙·핑크 택2)",price_n:31000,price_f:28000,desc:"일반(3,000원) 8팩 + 프리미엄 최대 2팩.",products:["5KM01","5KM02","5KM03","5KM04","5KM05","5KM06","5KM07","5KM08","5KM09","5KM10"],tier:true,
     noteDetail:{ "일반 8팩":"레드·퍼플·옐로우닭·옐로우대구·그린닭·그린호키 중 자유 선택","프리미엄 최대 2팩":"화이트·골드·블랙·핑크 중 합계 2팩 이내","가능 예시":"골드 2팩 ✓ / 블랙 2팩 ✓ / 골드1+블랙1 ✓","불가 예시":"골드2+핑크1 = 프리미엄 3팩 → 불가 ✗" } },
   { id:"SET04",name:"오키로스틱 10종 SET (화이트·골드·블랙·핑크 택4)",price_n:32000,price_f:29000,desc:"일반(3,000원) 6팩 + 프리미엄 최대 4팩.",products:["5KM01","5KM02","5KM03","5KM04","5KM05","5KM06","5KM07","5KM08","5KM09","5KM10"],tier:true,
@@ -444,12 +443,14 @@ const SETS = [
   { id:"SET06",name:"필로캣 3박스 SET",price_n:115200,price_f:88200,desc:"필로 CAT 3종 BOX 각 1개씩.",products:["PILLO02","PILLO04","PILLO06"],note:"연어&호키&게살 + 닭&고등어 + 닭&산양유 BOX 각 1박스" },
   { id:"SET07",name:"소피캣 3박스 SET",price_n:79200,price_f:70200,desc:"소피 CAT 라인에서 원하는 3박스를 자유 혼합.",products:["SOPHY02","SOPHY04","SOPHY06"],note:"Tasty·Natural 라인 혼합 가능, 원하는 3종 자유 선택" },
   { id:"SET08",name:"이지케어 (릴리프+이너프) 3박스 SET",price_n:38700,price_f:29900,desc:"분리불안(릴리프)+면역(이너프) 3박스.",products:["Easycare01","Easycare02"],note:"릴리프×3 + 이너프×3" },
+  { id:"SET08-5",name:"이지케어 (릴리프+이너프) 5박스 SET",price_n:74500,price_f:48400,desc:"분리불안(릴리프)+면역(이너프) 5박스.",products:["Easycare01","Easycare02"],note:"릴리프×5 + 이너프×5" },
   { id:"SET09",name:"이지케어 (오메가-3+헤어볼+멀티바이오틱스) 3박스 SET",price_n:32700,price_f:26700,desc:"오메가-3·헤어볼·장건강 기능성 이지케어 3박스.",products:["Easycare03","Easycare05","Easycare06"],note:"오메가-3×3 + 헤어볼×3 + 멀티바이오틱스×3" },
+  { id:"SET09-5",name:"이지케어 (오메가-3+헤어볼+멀티바이오틱스) 5박스 SET",price_n:74500,price_f:43200,desc:"오메가-3·헤어볼·장건강 기능성 이지케어 5박스.",products:["Easycare03","Easycare05","Easycare06"],note:"오메가-3×5 + 헤어볼×5 + 멀티바이오틱스×5" },
   { id:"SET10",name:"4,500원 10팩 묶음할인",price_n:45000,price_f:39000,desc:"좋아해·리틀제주 4,500원 제품 중 자유 조합 10팩.",products:["Love01","Love03","Love04","Love05","Jeju01","Jeju04"],note:"산양유좋아해·참돔·갈치·소고기좋아해·리틀제주닭가슴살·리틀제주호키광어 중 10팩 자유 조합" },
   { id:"SET11",name:"필로캣 BOX",price_n:38400,price_f:30000,desc:"필로 CAT 낱개 12캔 박스 (3종 중 1종 선택).",products:["PILLO01","PILLO03","PILLO05"],note:"연어&호키&게살 / 닭&고등어 / 닭&산양유 중 1종 선택" },
   { id:"SET12",name:"소피캣 BOX",price_n:26400,price_f:24000,desc:"소피 CAT 낱개 12캔 박스 (원하는 종류 선택).",products:["SOPHY01","SOPHY03","SOPHY05","SOPHY07","SOPHY09","SOPHY11","SOPHY13"],note:"소피캣 라인 중 원하는 맛 12캔 구성" },
   { id:"SET13",name:"필로독 BOX",price_n:34800,price_f:28800,desc:"필로 DOG 낱개(140g) 12캔 박스 (2종 중 1종 선택).",products:["PILLO07","PILLO09"],note:"닭&산양유 140g / 칠면조 140g 중 1종 선택 → 12캔" },
-  { id:"SET14",name:"메가트릿 3팩",price_n:36000,price_f:31000,desc:"메가트릿 닭안심 + 북어스틱 각 3팩.",products:["Treat18","Treat19"],note:"닭안심 90g×3팩 + 북어스틱 90g×3팩" },
+  { id:"SET14",name:"메가트릿 3팩",price_n:40500,price_f:33000,desc:"메가트릿 닭안심 + 북어스틱 각 3팩.",products:["Treat18","Treat19"],note:"닭안심 90g×3팩 + 북어스틱 90g×3팩" },
 ];
 
 function SetsTab({ onSelect }) {
